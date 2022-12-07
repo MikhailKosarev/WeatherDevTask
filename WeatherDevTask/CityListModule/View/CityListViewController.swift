@@ -8,6 +8,13 @@
 import UIKit
 
 final class CityListViewController: UITableViewController {
+    
+    let citySearchField: UISearchTextField = {
+        let searchTextField = UISearchTextField()
+        searchTextField.placeholder = "Search"
+        searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        return searchTextField
+    }()
 
     // MARK: - Life cycle
     
@@ -24,8 +31,12 @@ final class CityListViewController: UITableViewController {
     }
     
     private func setupTableView() {
+        tableView.register(SearchTableViewCell.self,
+                           forCellReuseIdentifier: SearchTableViewCell.reuseID)
         tableView.register(CityTableViewCell.self,
                            forCellReuseIdentifier: CityTableViewCell.reuseID)
+//        tableView.estimatedRowHeight = 200
+//        tableView.rowHeight = UITableView.automaticDimension
         tableView.allowsSelection = false
     }
 
@@ -47,8 +58,20 @@ final class CityListViewController: UITableViewController {
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseID,
-                                                 for: indexPath)
-        return cell
+        switch indexPath.section {
+        case 0:
+            return tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID,
+                                                     for: indexPath)
+        default:
+            return tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseID,
+                                                     for: indexPath)
+        }
+//        let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseID,
+//                                                 for: indexPath)
+
     }
+    
+//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        100
+//    }
 }

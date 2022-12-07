@@ -85,11 +85,14 @@ final class CityTableViewCell: UITableViewCell {
     
     private func setupView() {
         backgroundColor = .black
-        addSubview(mainStackView)
+        contentView.addSubview(mainStackView)
     }
     
     private func setConstraints() {
-        let margins = layoutMarginsGuide
+        // set margins
+//        contentView.layoutMargins = .init(top: 8.0, left: 0, bottom: 8.0, right: 0)
+        contentView.preservesSuperviewLayoutMargins = false
+        let margins = contentView.layoutMarginsGuide
         
         NSLayoutConstraint.activate([
             // weatherImageView
