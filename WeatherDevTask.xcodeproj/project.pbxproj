@@ -54,14 +54,102 @@
 		74D603102940BFF900643900 /* WeatherDevTask */ = {
 			isa = PBXGroup;
 			children = (
+				74D603252940C4DB00643900 /* Application */,
+				74D603272940C53500643900 /* CityListModule */,
+				74D603282940C55700643900 /* DetailWeatherModule */,
+				74D6032F2940C66700643900 /* Extensions */,
+				74D603262940C4F600643900 /* Resources */,
+			);
+			path = WeatherDevTask;
+			sourceTree = "<group>";
+		};
+		74D603252940C4DB00643900 /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				74D603112940BFF900643900 /* AppDelegate.swift */,
 				74D603132940BFF900643900 /* SceneDelegate.swift */,
-				74D603152940BFF900643900 /* ViewController.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		74D603262940C4F600643900 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				74D6031A2940BFFA00643900 /* Assets.xcassets */,
 				74D6031C2940BFFA00643900 /* LaunchScreen.storyboard */,
 				74D6031F2940BFFA00643900 /* Info.plist */,
 			);
-			path = WeatherDevTask;
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		74D603272940C53500643900 /* CityListModule */ = {
+			isa = PBXGroup;
+			children = (
+				74D603292940C60E00643900 /* Model */,
+				74D6032A2940C61500643900 /* View */,
+				74D6032B2940C61900643900 /* Presenter */,
+			);
+			path = CityListModule;
+			sourceTree = "<group>";
+		};
+		74D603282940C55700643900 /* DetailWeatherModule */ = {
+			isa = PBXGroup;
+			children = (
+				74D6032C2940C64200643900 /* Model */,
+				74D6032D2940C64600643900 /* View */,
+				74D6032E2940C64C00643900 /* Presenter */,
+			);
+			path = DetailWeatherModule;
+			sourceTree = "<group>";
+		};
+		74D603292940C60E00643900 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		74D6032A2940C61500643900 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				74D603152940BFF900643900 /* ViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		74D6032B2940C61900643900 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		74D6032C2940C64200643900 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		74D6032D2940C64600643900 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		74D6032E2940C64C00643900 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		74D6032F2940C66700643900 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -277,7 +365,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GRJL322676;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherDevTask/Info.plist;
+				INFOPLIST_FILE = WeatherDevTask/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -308,7 +396,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = GRJL322676;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = WeatherDevTask/Info.plist;
+				INFOPLIST_FILE = WeatherDevTask/Resources/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
