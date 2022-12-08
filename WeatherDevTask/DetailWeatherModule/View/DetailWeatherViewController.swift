@@ -39,6 +39,8 @@ final class DetailWeatherViewController: UIViewController {
     private func setupWeatherTableView() {
         weatherTableView.register(HourlyForecastTableViewCell.self,
                                   forCellReuseIdentifier: HourlyForecastTableViewCell.reuseID)
+        weatherTableView.register(DailyForecastTableViewCell.self,
+                                  forCellReuseIdentifier: DailyForecastTableViewCell.reuseID)
         weatherTableView.dataSource = self
         weatherTableView.delegate = self
     }
@@ -65,20 +67,48 @@ final class DetailWeatherViewController: UIViewController {
 
 extension DetailWeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        switch section {
+        case 0:
+            return 1
+        case 1:
+            return 7
+        default:
+            return 0
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = weatherTableView.dequeueReusableCell(withIdentifier: HourlyForecastTableViewCell.reuseID,
-                                                        for: indexPath)
-        return cell
+        switch indexPath.section {
+        case 0:
+            let cell = weatherTableView.dequeueReusableCell(withIdentifier: HourlyForecastTableViewCell.reuseID,
+                                                            for: indexPath)
+            return cell
+        case 1:
+            let cell = weatherTableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.reuseID,
+                                                            for: indexPath)
+            return cell
+        default:
+            return UITableViewCell()
+        }
     }
+
 }
 
 // MARK: - UITableViewDelegate
 
 extension DetailWeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        100
+        switch indexPath.section {
+        case 0:
+            return 100
+        case 1:
+            return 40
+        default:
+            return 0
+        }
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        2
     }
 }
