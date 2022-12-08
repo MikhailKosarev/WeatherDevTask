@@ -47,11 +47,21 @@ final class CurrentForecastView: UIView {
         return label
     }()
     
+    private let shortWeatherDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = .systemFont(ofSize: 20, weight: .medium)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "8° | Cloudy"
+        return label
+    }()
+    
     private lazy var currentWeatherStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [cityNameLabel,
                                                        temperatureLabel,
                                                        weatherDescriptionLabel,
-                                                       highLowLabel])
+                                                       highLowLabel,
+                                                       shortWeatherDescriptionLabel])
         stackView.axis = .vertical
 //        stackView.spacing = 4
         stackView.alignment = .center
@@ -59,11 +69,15 @@ final class CurrentForecastView: UIView {
         return stackView
     }()
     
+    // MARK: - Private properties
+    private var isDescriptionFull: Bool = true
+    
     // MARK: - Initialization
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
+        configureDescription()
         setConstraints()
     }
     
@@ -85,5 +99,26 @@ final class CurrentForecastView: UIView {
             currentWeatherStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
             currentWeatherStackView.bottomAnchor.constraint(equalTo: bottomAnchor),
         ])
+    }
+    
+    private func configureDescription() {
+        shortWeatherDescriptionLabel.isHidden = isDescriptionFull
+        temperatureLabel.isHidden = !isDescriptionFull
+        weatherDescriptionLabel.isHidden = !isDescriptionFull
+        highLowLabel.isHidden = !isDescriptionFull
+    }
+    
+    // MARK: - Internal methods
+    
+    func setDescriptionFull(_ tumbler: Bool) {
+        isDescriptionFull = tumbler
+        configureDescription()
+//        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: {
+//            self.configureDescription()
+//        }, completion: nil)
+//        UIView.animate(withDuration: 2.0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0,
+//        options: [], animations: {
+//        self.configureDescription() }, completion: nil)
+//        configureDescription()
     }
 }

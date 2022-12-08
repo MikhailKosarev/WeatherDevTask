@@ -15,6 +15,9 @@ final class DetailWeatherViewController: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
+        tableView.allowsSelection = false
+//        tableView.bounces = true
+        tableView.separatorColor = .white.withAlphaComponent(0.3)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
@@ -132,5 +135,14 @@ extension DetailWeatherViewController: UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         4
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension DetailWeatherViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        currentForecastView.setDescriptionFull(offset <= 20)
     }
 }
