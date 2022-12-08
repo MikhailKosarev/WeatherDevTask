@@ -37,12 +37,17 @@ final class DetailWeatherViewController: UIViewController {
     }
     
     private func setupWeatherTableView() {
+        // register cells
         weatherTableView.register(HourlyForecastTableViewCell.self,
                                   forCellReuseIdentifier: HourlyForecastTableViewCell.reuseID)
         weatherTableView.register(DailyForecastTableViewCell.self,
                                   forCellReuseIdentifier: DailyForecastTableViewCell.reuseID)
         weatherTableView.register(TodaysDescriptionTableViewCell.self,
                                   forCellReuseIdentifier: TodaysDescriptionTableViewCell.reuseID)
+        weatherTableView.register(OtherParametersTableViewCell.self,
+                                  forCellReuseIdentifier: OtherParametersTableViewCell.reuseID)
+        
+        // set delegates
         weatherTableView.dataSource = self
         weatherTableView.delegate = self
     }
@@ -76,6 +81,8 @@ extension DetailWeatherViewController: UITableViewDataSource {
             return 7
         case 2:
             return 1
+        case 3:
+            return 5
         default:
             return 0
         }
@@ -95,11 +102,14 @@ extension DetailWeatherViewController: UITableViewDataSource {
             let cell = weatherTableView.dequeueReusableCell(withIdentifier: TodaysDescriptionTableViewCell.reuseID,
                                                             for: indexPath)
             return cell
+        case 3:
+            let cell = weatherTableView.dequeueReusableCell(withIdentifier: OtherParametersTableViewCell.reuseID,
+                                                            for: indexPath)
+            return cell
         default:
             return UITableViewCell()
         }
     }
-
 }
 
 // MARK: - UITableViewDelegate
@@ -113,12 +123,14 @@ extension DetailWeatherViewController: UITableViewDelegate {
             return 40
         case 2:
             return 66
+        case 3:
+            return 66
         default:
             return 0
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        3
+        4
     }
 }
