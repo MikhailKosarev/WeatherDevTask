@@ -41,6 +41,8 @@ final class DetailWeatherViewController: UIViewController {
                                   forCellReuseIdentifier: HourlyForecastTableViewCell.reuseID)
         weatherTableView.register(DailyForecastTableViewCell.self,
                                   forCellReuseIdentifier: DailyForecastTableViewCell.reuseID)
+        weatherTableView.register(TodaysDescriptionTableViewCell.self,
+                                  forCellReuseIdentifier: TodaysDescriptionTableViewCell.reuseID)
         weatherTableView.dataSource = self
         weatherTableView.delegate = self
     }
@@ -72,6 +74,8 @@ extension DetailWeatherViewController: UITableViewDataSource {
             return 1
         case 1:
             return 7
+        case 2:
+            return 1
         default:
             return 0
         }
@@ -85,6 +89,10 @@ extension DetailWeatherViewController: UITableViewDataSource {
             return cell
         case 1:
             let cell = weatherTableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.reuseID,
+                                                            for: indexPath)
+            return cell
+        case 2:
+            let cell = weatherTableView.dequeueReusableCell(withIdentifier: TodaysDescriptionTableViewCell.reuseID,
                                                             for: indexPath)
             return cell
         default:
@@ -103,12 +111,14 @@ extension DetailWeatherViewController: UITableViewDelegate {
             return 100
         case 1:
             return 40
+        case 2:
+            return 66
         default:
             return 0
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        2
+        3
     }
 }
