@@ -25,6 +25,7 @@
 		74E071422943483200B9722F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 74E071412943483200B9722F /* Alamofire */; };
 		74E071462943497500B9722F /* WeatherApiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E071452943497500B9722F /* WeatherApiInfo.swift */; };
 		74E0714829434E0000B9722F /* OneCallWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0714729434E0000B9722F /* OneCallWeatherData.swift */; };
+		74E0714A29435FEB00B9722F /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0714929435FEB00B9722F /* NetworkServices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -47,6 +48,7 @@
 		74D603372940DE5200643900 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		74E071452943497500B9722F /* WeatherApiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiInfo.swift; sourceTree = "<group>"; };
 		74E0714729434E0000B9722F /* OneCallWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallWeatherData.swift; sourceTree = "<group>"; };
+		74E0714929435FEB00B9722F /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +220,7 @@
 			children = (
 				74E071452943497500B9722F /* WeatherApiInfo.swift */,
 				74E0714729434E0000B9722F /* OneCallWeatherData.swift */,
+				74E0714929435FEB00B9722F /* NetworkServices.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 				74D603322940D4D200643900 /* Constants.swift in Sources */,
 				742EC22629412AFA00E2817E /* SearchTableViewCell.swift in Sources */,
 				745070A92942160D00F9EDE1 /* DetailWeatherViewController.swift in Sources */,
+				74E0714A29435FEB00B9722F /* NetworkServices.swift in Sources */,
 				74E071462943497500B9722F /* WeatherApiInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
