@@ -26,6 +26,7 @@
 		74E071462943497500B9722F /* WeatherApiInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E071452943497500B9722F /* WeatherApiInfo.swift */; };
 		74E0714829434E0000B9722F /* OneCallWeatherData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0714729434E0000B9722F /* OneCallWeatherData.swift */; };
 		74E0714A29435FEB00B9722F /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0714929435FEB00B9722F /* NetworkServices.swift */; };
+		74E07150294377ED00B9722F /* LocationGeocoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74E0714F294377ED00B9722F /* LocationGeocoder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,7 @@
 		74E071452943497500B9722F /* WeatherApiInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherApiInfo.swift; sourceTree = "<group>"; };
 		74E0714729434E0000B9722F /* OneCallWeatherData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneCallWeatherData.swift; sourceTree = "<group>"; };
 		74E0714929435FEB00B9722F /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		74E0714F294377ED00B9722F /* LocationGeocoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationGeocoder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 		74E07143294348CF00B9722F /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				74E0714D294377B300B9722F /* Utilities */,
 				74E07144294348DA00B9722F /* Network */,
 			);
 			path = Services;
@@ -223,6 +226,14 @@
 				74E0714929435FEB00B9722F /* NetworkServices.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		74E0714D294377B300B9722F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				74E0714F294377ED00B9722F /* LocationGeocoder.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,6 +315,7 @@
 				74D603122940BFF900643900 /* AppDelegate.swift in Sources */,
 				745070B7294274D500F9EDE1 /* OtherParametersTableViewCell.swift in Sources */,
 				74E0714829434E0000B9722F /* OneCallWeatherData.swift in Sources */,
+				74E07150294377ED00B9722F /* LocationGeocoder.swift in Sources */,
 				745070AB294219A900F9EDE1 /* CurrentForecastView.swift in Sources */,
 				74D603382940DE5200643900 /* CityTableViewCell.swift in Sources */,
 				745070B029423A6E00F9EDE1 /* HourlyForecastTableViewCell.swift in Sources */,
