@@ -8,6 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		742EC22629412AFA00E2817E /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742EC22529412AFA00E2817E /* SearchTableViewCell.swift */; };
+		745070A92942160D00F9EDE1 /* DetailWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070A82942160D00F9EDE1 /* DetailWeatherViewController.swift */; };
+		745070AB294219A900F9EDE1 /* CurrentForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070AA294219A900F9EDE1 /* CurrentForecastView.swift */; };
+		745070AE29421E2100F9EDE1 /* HourlyForecastCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070AD29421E2100F9EDE1 /* HourlyForecastCollectionViewCell.swift */; };
+		745070B029423A6E00F9EDE1 /* HourlyForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070AF29423A6E00F9EDE1 /* HourlyForecastTableViewCell.swift */; };
+		745070B3294265D000F9EDE1 /* DailyForecastTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070B2294265D000F9EDE1 /* DailyForecastTableViewCell.swift */; };
+		745070B52942720D00F9EDE1 /* TodaysDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070B42942720D00F9EDE1 /* TodaysDescriptionTableViewCell.swift */; };
+		745070B7294274D500F9EDE1 /* OtherParametersTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070B6294274D500F9EDE1 /* OtherParametersTableViewCell.swift */; };
 		74D603122940BFF900643900 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D603112940BFF900643900 /* AppDelegate.swift */; };
 		74D603142940BFF900643900 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74D603132940BFF900643900 /* SceneDelegate.swift */; };
 		74D6031B2940BFFA00643900 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 74D6031A2940BFFA00643900 /* Assets.xcassets */; };
@@ -19,6 +26,13 @@
 
 /* Begin PBXFileReference section */
 		742EC22529412AFA00E2817E /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
+		745070A82942160D00F9EDE1 /* DetailWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherViewController.swift; sourceTree = "<group>"; };
+		745070AA294219A900F9EDE1 /* CurrentForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecastView.swift; sourceTree = "<group>"; };
+		745070AD29421E2100F9EDE1 /* HourlyForecastCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastCollectionViewCell.swift; sourceTree = "<group>"; };
+		745070AF29423A6E00F9EDE1 /* HourlyForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HourlyForecastTableViewCell.swift; sourceTree = "<group>"; };
+		745070B2294265D000F9EDE1 /* DailyForecastTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyForecastTableViewCell.swift; sourceTree = "<group>"; };
+		745070B42942720D00F9EDE1 /* TodaysDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodaysDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		745070B6294274D500F9EDE1 /* OtherParametersTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherParametersTableViewCell.swift; sourceTree = "<group>"; };
 		74D6030E2940BFF900643900 /* WeatherDevTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherDevTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		74D603112940BFF900643900 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		74D603132940BFF900643900 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +55,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		745070AC29421E0F00F9EDE1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				745070AD29421E2100F9EDE1 /* HourlyForecastCollectionViewCell.swift */,
+				745070AF29423A6E00F9EDE1 /* HourlyForecastTableViewCell.swift */,
+				745070B2294265D000F9EDE1 /* DailyForecastTableViewCell.swift */,
+				745070B42942720D00F9EDE1 /* TodaysDescriptionTableViewCell.swift */,
+				745070B6294274D500F9EDE1 /* OtherParametersTableViewCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		74D603052940BFF900643900 = {
 			isa = PBXGroup;
 			children = (
@@ -142,6 +168,9 @@
 		74D6032D2940C64600643900 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				745070AC29421E0F00F9EDE1 /* Cells */,
+				745070AA294219A900F9EDE1 /* CurrentForecastView.swift */,
+				745070A82942160D00F9EDE1 /* DetailWeatherViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -240,11 +269,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				74D603122940BFF900643900 /* AppDelegate.swift in Sources */,
+				745070B7294274D500F9EDE1 /* OtherParametersTableViewCell.swift in Sources */,
+				745070AB294219A900F9EDE1 /* CurrentForecastView.swift in Sources */,
 				74D603382940DE5200643900 /* CityTableViewCell.swift in Sources */,
+				745070B029423A6E00F9EDE1 /* HourlyForecastTableViewCell.swift in Sources */,
 				74D603142940BFF900643900 /* SceneDelegate.swift in Sources */,
+				745070AE29421E2100F9EDE1 /* HourlyForecastCollectionViewCell.swift in Sources */,
+				745070B52942720D00F9EDE1 /* TodaysDescriptionTableViewCell.swift in Sources */,
 				74D603342940D96900643900 /* CityListViewController.swift in Sources */,
+				745070B3294265D000F9EDE1 /* DailyForecastTableViewCell.swift in Sources */,
 				74D603322940D4D200643900 /* Constants.swift in Sources */,
 				742EC22629412AFA00E2817E /* SearchTableViewCell.swift in Sources */,
+				745070A92942160D00F9EDE1 /* DetailWeatherViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
