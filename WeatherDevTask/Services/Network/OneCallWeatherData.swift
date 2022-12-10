@@ -14,7 +14,7 @@ struct OneCallWeatherData: Codable {
     let timezone: String
     let timezoneOffset: Int
     let current: Current
-    let minutely: [Minutely]
+    let minutely: [Minutely]?
     let hourly: [Current]
     let daily: [Daily]
 
@@ -68,7 +68,7 @@ struct Rain: Codable {
 
 struct Weather: Codable {
     let id: Int
-    let main: Main
+    let main: String
     let weatherDescription: String
     let icon: String
 
@@ -77,13 +77,6 @@ struct Weather: Codable {
         case weatherDescription = "description"
         case icon
     }
-}
-
-enum Main: String, Codable {
-    case clear = "Clear"
-    case clouds = "Clouds"
-    case mist = "Mist"
-    case rain = "Rain"
 }
 
 // MARK: - Daily
