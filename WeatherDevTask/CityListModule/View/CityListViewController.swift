@@ -32,9 +32,15 @@ final class CityListViewController: UITableViewController {
         presenter?.getWeather()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateNavBarColor()
+    }
+    
     // MARK: - Private methods
     
     private func setupView() {
+        title = "Weather"
         view.backgroundColor = .black
     }
     
@@ -46,6 +52,22 @@ final class CityListViewController: UITableViewController {
 //        tableView.estimatedRowHeight = 200
 //        tableView.rowHeight = UITableView.automaticDimension
 //        tableView.allowsSelection = false
+    }
+    
+    private func updateNavBarColor() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        // setup style
+        let navBar = navigationController?.navigationBar
+        navBar?.barStyle = .black
+        navBar?.isTranslucent = false
+        navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        // remove the back button text:
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
+                                                           style: .plain,
+                                                           target: nil,
+                                                           action: nil)
+//        self.navigationController?.navigationBar.setNeedsLayout()
     }
 
     // MARK: - Table view data source

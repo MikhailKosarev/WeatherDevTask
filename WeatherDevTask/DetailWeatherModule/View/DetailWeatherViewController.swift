@@ -31,6 +31,11 @@ final class DetailWeatherViewController: UIViewController {
         setConstraints()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        updateNavBarColor()
+    }
+    
     // MARK: - Private methods
     
     private func setupView() {
@@ -53,6 +58,16 @@ final class DetailWeatherViewController: UIViewController {
         // set delegates
         weatherTableView.dataSource = self
         weatherTableView.delegate = self
+    }
+    
+    private func updateNavBarColor() {
+        navigationController?.navigationBar.prefersLargeTitles = false
+        // setup style
+        let navBar = navigationController?.navigationBar
+        navBar?.barStyle = .black
+        navBar?.isTranslucent = true
+        navBar?.tintColor = .white
+//        self.navigationController?.navigationBar.setNeedsLayout()
     }
     
     private func setConstraints() {
