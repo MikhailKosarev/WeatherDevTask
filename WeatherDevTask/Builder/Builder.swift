@@ -17,6 +17,15 @@ final class ModuleBulder: Builder {
         let networkService = NetworkService()
         let presenter = CityListPresenter(view: view, networkService: networkService)
         view.presenter = presenter
+        let navigationController = UINavigationController(rootViewController: view)
+        return navigationController
+    }
+    
+    static func createDetailWeatherModule() -> UIViewController {
+        let view = DetailWeatherViewController()
+//        let networkService = NetworkService()
+//        let presenter = Deta(view: view, networkService: networkService)
+//        view.presenter = presenter
         return view
     }
 }
