@@ -45,7 +45,7 @@ final class CityListViewController: UITableViewController {
                            forCellReuseIdentifier: CityTableViewCell.reuseID)
 //        tableView.estimatedRowHeight = 200
 //        tableView.rowHeight = UITableView.automaticDimension
-        tableView.allowsSelection = false
+//        tableView.allowsSelection = false
     }
 
     // MARK: - Table view data source
@@ -82,6 +82,11 @@ final class CityListViewController: UITableViewController {
         default:
             return UITableViewCell()
         }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailWeatherViewController = ModuleBulder.createDetailWeatherModule()
+        navigationController?.pushViewController(detailWeatherViewController, animated: true)
     }
 }
 
