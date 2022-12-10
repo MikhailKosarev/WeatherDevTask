@@ -36,6 +36,7 @@ final class CityListPresenter: CityListPresenterProtocol {
     let locationGeocoder = LocationGeocoder()
     let citiesArray = ["Warsaw","Bucharest","Martuni","Shah Alam","Budapest","Munich"]
     var weatherDataArray = [CityCurrentWeatherViewData]()
+    let dateConverter = DateConverter()
     
     // MARK: - Initialization
     
@@ -57,10 +58,16 @@ final class CityListPresenter: CityListPresenterProtocol {
                                                    lat: String(coordinate.latitude)) { result in
                     switch result {
                     case .success(let weatherData):
-                        let viewData = CityCurrentWeatherViewData(currentTime: weatherData.timezone,
+                        // get current time
+                        let currentTime = self.dateConverter.convertingUTCtime(weatherData.current.dt)
+                            .currentTime(weatherData.timezoneOffset)
+                        print(currentTime)
+                        // fill viewData
+                        let viewData = CityCurrentWeatherViewData(currentTime: currentTime,
                                                                   cityName: city,
                                                                   temperature: weatherData.current.temp,
                                                                   conditionId: weatherData.current.weather[0].id)
+                        print()
                         self.weatherDataArray.append(viewData)
                         dispatchGroup.leave()
                     case .failure(let error):

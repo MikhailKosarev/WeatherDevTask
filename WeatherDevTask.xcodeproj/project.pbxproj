@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7412E8CC29450CFC00E10367 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7412E8CB29450CFC00E10367 /* DateConverter.swift */; };
+		7412E8CE29450F5500E10367 /* Date + Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7412E8CD29450F5500E10367 /* Date + Extension.swift */; };
 		742EC22629412AFA00E2817E /* SearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742EC22529412AFA00E2817E /* SearchTableViewCell.swift */; };
 		745070A92942160D00F9EDE1 /* DetailWeatherViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070A82942160D00F9EDE1 /* DetailWeatherViewController.swift */; };
 		745070AB294219A900F9EDE1 /* CurrentForecastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745070AA294219A900F9EDE1 /* CurrentForecastView.swift */; };
@@ -33,6 +35,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7412E8CB29450CFC00E10367 /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
+		7412E8CD29450F5500E10367 /* Date + Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date + Extension.swift"; sourceTree = "<group>"; };
 		742EC22529412AFA00E2817E /* SearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableViewCell.swift; sourceTree = "<group>"; };
 		745070A82942160D00F9EDE1 /* DetailWeatherViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailWeatherViewController.swift; sourceTree = "<group>"; };
 		745070AA294219A900F9EDE1 /* CurrentForecastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentForecastView.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 		74D6032F2940C66700643900 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				7412E8CD29450F5500E10367 /* Date + Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -241,6 +246,7 @@
 			isa = PBXGroup;
 			children = (
 				74E0714F294377ED00B9722F /* LocationGeocoder.swift */,
+				7412E8CB29450CFC00E10367 /* DateConverter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -338,6 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				74D603122940BFF900643900 /* AppDelegate.swift in Sources */,
+				7412E8CE29450F5500E10367 /* Date + Extension.swift in Sources */,
 				74E0715529437CF200B9722F /* CityCurrentWeatherViewData.swift in Sources */,
 				745070B7294274D500F9EDE1 /* OtherParametersTableViewCell.swift in Sources */,
 				74E0714829434E0000B9722F /* OneCallWeatherData.swift in Sources */,
@@ -351,6 +358,7 @@
 				74E0715229437AE700B9722F /* CityListPresenter.swift in Sources */,
 				745070B52942720D00F9EDE1 /* TodaysDescriptionTableViewCell.swift in Sources */,
 				74D603342940D96900643900 /* CityListViewController.swift in Sources */,
+				7412E8CC29450CFC00E10367 /* DateConverter.swift in Sources */,
 				745070B3294265D000F9EDE1 /* DailyForecastTableViewCell.swift in Sources */,
 				74D603322940D4D200643900 /* Constants.swift in Sources */,
 				742EC22629412AFA00E2817E /* SearchTableViewCell.swift in Sources */,

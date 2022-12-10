@@ -10,7 +10,6 @@ import UIKit
 struct CityCurrentWeatherViewData {
     let currentTime: String
     let cityName: String
-//    let weatherImage: UIImage
     let temperature: Double
     let conditionId: Int
     
