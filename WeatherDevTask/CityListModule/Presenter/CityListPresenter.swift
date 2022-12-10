@@ -22,7 +22,6 @@ protocol CityListPresenterProtocol: AnyObject {
     init(view: CityListViewProtocol, networkService: NetworkServiceProtocol)
 
     func getWeather()
-    func fetchWeather()
 }
 
 // MARK: - CityListPresenter
@@ -33,6 +32,7 @@ final class CityListPresenter: CityListPresenterProtocol {
     
     weak var view: CityListViewProtocol?
     var networkService: NetworkServiceProtocol
+    
     let locationGeocoder = LocationGeocoder()
     let citiesArray = ["Warsaw","Bucharest","Martuni","Shah Alam","Budapest","Munich"]
     var weatherDataArray = [CityCurrentWeatherViewData]()
@@ -46,9 +46,6 @@ final class CityListPresenter: CityListPresenterProtocol {
     
     // MARK: - Internal methods
     
-    func fetchWeather() {
-    }
-    
     func getWeather() {
         let dispatchGroup = DispatchGroup()
         citiesArray.forEach { city in
@@ -58,7 +55,6 @@ final class CityListPresenter: CityListPresenterProtocol {
                 guard let coordinate = coordinate, error == nil else { return }
                 self.networkService.getWeatherData(lon: String(coordinate.longitude),
                                                    lat: String(coordinate.latitude)) { result in
-                    print("ok")
                     switch result {
                     case .success(let weatherData):
                         let viewData = CityCurrentWeatherViewData(currentTime: weatherData.timezone,
@@ -74,7 +70,6 @@ final class CityListPresenter: CityListPresenterProtocol {
             }
         }
         dispatchGroup.notify(queue: .main) {
-            print(self.weatherDataArray)
             self.view?.reloadTableView()
         }
     }

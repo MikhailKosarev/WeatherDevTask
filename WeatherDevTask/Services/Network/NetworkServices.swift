@@ -22,6 +22,7 @@ final class NetworkService: NetworkServiceProtocol {
         let parameters: [String: String] = [
             "lon": "\(lon)",
             "lat": "\(lat)",
+            "units": "metric",
             "appid": "\(WeatherApiInfo.apiID)"
         ]
         

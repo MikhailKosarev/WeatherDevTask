@@ -47,6 +47,7 @@ final class CityTableViewCell: UITableViewCell {
         label.font = .systemFont(ofSize: 50, weight: .thin)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "2°"
+        label.textAlignment = .right
         return label
     }()
     
@@ -59,11 +60,19 @@ final class CityTableViewCell: UITableViewCell {
         return stackView
     }()
     
+    private lazy var weatherStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [weatherImageView,
+                                                       temperatureLabel])
+//        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var mainStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [cityStackView,
-                                                      weatherImageView,
-                                                      temperatureLabel])
-        stackView.distribution = .equalCentering
+                                                      weatherStackView])
+        stackView.distribution = .fillEqually
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -94,6 +103,9 @@ final class CityTableViewCell: UITableViewCell {
         contentView.preservesSuperviewLayoutMargins = false
         let margins = contentView.layoutMarginsGuide
         
+        // set priorities
+        temperatureLabel.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        
         NSLayoutConstraint.activate([
             // weatherImageView
             weatherImageView.heightAnchor.constraint(equalToConstant: 42),
@@ -105,5 +117,14 @@ final class CityTableViewCell: UITableViewCell {
             mainStackView.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             mainStackView.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
         ])
+    }
+    
+    // MARK: - Internal methods
+    
+    func configureWith(_ viewData: CityCurrentWeatherViewData) {
+        currentTimeLabel.text = viewData.currentTime
+        cityNameLabel.text = viewData.cityName
+        weatherImageView.image = viewData.weatherImage
+        temperatureLabel.text = viewData.temperatureString
     }
 }
