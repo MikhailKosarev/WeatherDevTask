@@ -9,12 +9,19 @@ import UIKit
 
 final class CityListViewController: UITableViewController {
     
-    let citySearchField: UISearchTextField = {
+    // MARK: - UI elements
+    
+    private let citySearchField: UISearchTextField = {
         let searchTextField = UISearchTextField()
         searchTextField.placeholder = "Search"
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
         return searchTextField
     }()
+    
+    // MARK: - Internal properties
+    
+    var presenter: CityListPresenterProtocol?
+    
 
     // MARK: - Life cycle
     
@@ -22,6 +29,7 @@ final class CityListViewController: UITableViewController {
         super.viewDidLoad()
         setupView()
         setupTableView()
+        presenter?.getWeather()
     }
     
     // MARK: - Private methods
@@ -51,7 +59,8 @@ final class CityListViewController: UITableViewController {
         case 0:
             return 1
         default:
-            return 10
+            return presenter?.weatherDataArray.count ?? 0
+
         }
     }
 
@@ -62,16 +71,28 @@ final class CityListViewController: UITableViewController {
         case 0:
             return tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID,
                                                      for: indexPath)
-        default:
-            return tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseID,
-                                                     for: indexPath)
-        }
-//        let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseID,
-//                                                 for: indexPath)
+        case 1:
+            let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseID,
+                                                     for: indexPath) as! CityTableViewCell
+            guard let viewData = presenter?.weatherDataArray[indexPath.row] else { return UITableViewCell() }
 
+            cell.configureWith(viewData)
+            return cell
+            
+        default:
+            return UITableViewCell()
+        }
+    }
+}
+
+// MARK: - CityListViewProtocol
+
+extension CityListViewController: CityListViewProtocol {
+    func reloadTableView() {
+        tableView.reloadData()
     }
     
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        100
-//    }
+    func loadWeather(viewData: CityCurrentWeatherViewData) {
+//        print("loading weather")
+    }
 }
