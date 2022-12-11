@@ -142,9 +142,9 @@ final class DailyForecastTableViewCell: UITableViewCell {
     func configureWith(viewData: DailyForecastViewData) {
         dayTitleLabel.text = viewData.dayTitle
         weatherImageView.image = viewData.weatherImage
-        humidityLabel.text = viewData.humidityString
-        dayTemperatureLabel.text = viewData.dayTemperatureString
-        nightTemperatureLabel.text = viewData.nightTemperatureString
+        humidityLabel.text = viewData.humidity
+        dayTemperatureLabel.text = viewData.dayTemperature
+        nightTemperatureLabel.text = viewData.nightTemperature
     }
 }
 
