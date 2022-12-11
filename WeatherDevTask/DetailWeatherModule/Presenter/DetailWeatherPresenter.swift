@@ -141,10 +141,12 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
             let hourly = weatherData.hourly[index]
             // get time
             let time = self.dateConverter.convertingUTCtime(hourly.dt).dtToTime12Hours(weatherData.timezoneOffset)
+            let temperature = TemperatureFormatter.getStringTemperatureFrom(hourly.temp)
             // fill data
+            let weatherImage = WeatherImageConverter.getImage(from: hourly.weather[0].id)
             let viewData = HourlyForecastViewData(time: time,
-                                                  conditionId: hourly.weather[0].id,
-                                                  temperature: hourly.temp)
+                                                  temperature: temperature,
+                                                  weatherImage: weatherImage)
             self.hourlyForecastData.append(viewData)
         }
     }
@@ -158,18 +160,22 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
             let daily = weatherData.daily[index]
             // get day of week
             let dayOfWeek = self.dateConverter.convertingUTCtime(daily.dt).dtToDayOfWeek(weatherData.timezoneOffset)
+            let weatherImage = WeatherImageConverter.getImage(from: daily.weather[0].id)
+            let humidity = "\(daily.humidity)%"
+            let dayTemperature = TemperatureFormatter.getStringTemperatureWithoutDegreeSignFrom(daily.temp.day)
+            let nightTemperature = TemperatureFormatter.getStringTemperatureWithoutDegreeSignFrom(daily.temp.night)
             // fill data
             let viewData = DailyForecastViewData(dayTitle: dayOfWeek,
-                                                 conditionId: daily.weather[0].id,
-                                                 humidity: daily.humidity,
-                                                 dayTemperature: daily.temp.day,
-                                                 nightTemperature: daily.temp.night)
+                                                 weatherImage: weatherImage,
+                                                 humidity: humidity,
+                                                 dayTemperature: dayTemperature,
+                                                 nightTemperature: nightTemperature)
             self.dailyForecastData.append(viewData)
         }
     }
     
     private func fillTodaysDescriptionViewDataWith(_ weatherData: OneCallWeatherData) {
-        self.todaysDescriptionData = TodaysDescriptionViewData(description: weatherData.current.weather[0].weatherDescription)
+        self.todaysDescriptionData = TodaysDescriptionViewData(description: "There will be " + weatherData.current.weather[0].weatherDescription + " all the day")
     }
     
     private func fillOtherParametersViewDataWith(_ weatherData: OneCallWeatherData) {
@@ -196,7 +202,7 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
         // fill wind/feels like
         let wind = String(weatherData.current.windSpeed) + " m/s"
         self.otherParametersViewData[2].leftValue = wind
-        let feelsLike = String(weatherData.current.feelsLike) + "°"
+        let feelsLike = TemperatureFormatter.getStringTemperatureFrom(weatherData.current.feelsLike)
         self.otherParametersViewData[2].rightValue = feelsLike
         
         // fill precipitation/pressure
