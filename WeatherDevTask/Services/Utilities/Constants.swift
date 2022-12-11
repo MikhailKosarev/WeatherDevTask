@@ -28,5 +28,10 @@ struct Constants {
                                                                rightTitle: "PRESSURE"),
                                        OtherParametersViewData(leftTitle: "VISIBILITY",
                                                                rightTitle: "UV INDEX")
+                                              
     ]
+    
+    // colors
+    static let detailWeatherScreenBackgroundColor = #colorLiteral(red: 0.3048475683, green: 0.598276794, blue: 0.8936008811, alpha: 1)
+    static let humidityLabelTextColor = #colorLiteral(red: 0.4862745098, green: 0.8117647059, blue: 0.9764705882, alpha: 1)
 }

@@ -36,7 +36,7 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 13, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = #colorLiteral(red: 0.4862745098, green: 0.8117647059, blue: 0.9764705882, alpha: 1)
+        label.textColor = Constants.humidityLabelTextColor
         return label
     }()
     

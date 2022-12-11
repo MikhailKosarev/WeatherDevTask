@@ -56,7 +56,7 @@ final class DetailWeatherViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupView() {
-        view.backgroundColor = #colorLiteral(red: 0.3048475683, green: 0.598276794, blue: 0.8936008811, alpha: 1)
+        view.backgroundColor = Constants.detailWeatherScreenBackgroundColor
         view.addSubview(currentForecastView)
         view.addSubview(weatherTableView)
         view.addSubview(activityIndicator)
