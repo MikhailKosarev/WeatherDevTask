@@ -63,18 +63,36 @@ final class DailyForecastTableViewCell: UITableViewCell {
         return label
     }()
     
+    private lazy var weatherHumidityStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [weatherImageView,
+                                                       humidityLabel])
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    private lazy var temperatureStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [dayTemperatureLabel,
+                                                       nightTemperatureLabel])
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 8
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     private lazy var dailyForecastStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [dayTitleLabel,
-                                                       weatherImageView,
-                                                       humidityLabel,
-                                                       dayTemperatureLabel,
-                                                       nightTemperatureLabel])
-//        stackView.spacing = 8
-        stackView.distribution = .fillProportionally
+                                                       weatherHumidityStackView,
+                                                       temperatureStackView])
+        //        stackView.spacing = 8
+        stackView.distribution = .fillEqually
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.setCustomSpacing(4, after: weatherImageView)
-        stackView.setCustomSpacing(8, after: dayTemperatureLabel)
+//        stackView.setCustomSpacing(4, after: weatherImageView)
+//        stackView.setCustomSpacing(8, after: dayTemperatureLabel)
         return stackView
     }()
 
@@ -105,17 +123,28 @@ final class DailyForecastTableViewCell: UITableViewCell {
                                      right: 8)
         // set priorities
         dayTitleLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
+        humidityLabel.setContentHuggingPriority(.defaultLow, for: .horizontal)
         
         NSLayoutConstraint.activate([
             // weatherImageView
             weatherImageView.heightAnchor.constraint(equalToConstant: 30),
-            weatherImageView.widthAnchor.constraint(equalToConstant: 30),
+//            weatherImageView.widthAnchor.constraint(equalToConstant: 30),
             
             // dailyForecastStackView
             dailyForecastStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),
             dailyForecastStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             dailyForecastStackView.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor)
         ])
+    }
+    
+    // MARK: - Internal methods
+    
+    func configureWith(viewData: DailyForecastViewData) {
+        dayTitleLabel.text = viewData.dayTitle
+        weatherImageView.image = viewData.weatherImage
+        humidityLabel.text = viewData.humidityString
+        dayTemperatureLabel.text = viewData.dayTemperatureString
+        nightTemperatureLabel.text = viewData.nightTemperatureString
     }
 }
 
