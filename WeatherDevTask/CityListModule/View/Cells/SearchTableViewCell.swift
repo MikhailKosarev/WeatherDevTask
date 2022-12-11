@@ -7,15 +7,23 @@
 
 import UIKit
 
+protocol CitySearchDelegateProtocol: AnyObject {
+    func searchTextChanged(searchText: String)
+}
+
 final class SearchTableViewCell: UITableViewCell {
     
     // MARK: - Static properties
     
     static let reuseID = "SearchTableViewCell"
     
+    // MARK: - Internal properties
+    
+    weak var delegate: CitySearchDelegateProtocol?
+    
     // MARK: - UI properties
     
-    let citySearchField: UISearchTextField = {
+    lazy var citySearchField: UISearchTextField = {
         let searchTextField = UISearchTextField()
         searchTextField.textColor = .white
         searchTextField.tintColor = .white
@@ -25,6 +33,7 @@ final class SearchTableViewCell: UITableViewCell {
         searchTextField.attributedPlaceholder = NSAttributedString(string: "Search",
                                                                    attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
         searchTextField.translatesAutoresizingMaskIntoConstraints = false
+        searchTextField.addTarget(self, action: #selector(searchTextChanged(_:)), for: .editingChanged)
         return searchTextField
     }()
 
@@ -60,5 +69,14 @@ final class SearchTableViewCell: UITableViewCell {
             citySearchField.trailingAnchor.constraint(equalTo: margins.trailingAnchor),
             citySearchField.bottomAnchor.constraint(equalTo: margins.bottomAnchor),
         ])
+    }
+    
+    // MARK: - Selectors
+    
+    @objc private func searchTextChanged(_ sender: UISearchTextField) {
+        guard let text = sender.text else { return }
+//        print(text)
+//        print("text changed")
+        delegate?.searchTextChanged(searchText: text)
     }
 }
