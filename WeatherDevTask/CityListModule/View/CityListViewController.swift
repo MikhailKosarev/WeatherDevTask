@@ -51,9 +51,6 @@ final class CityListViewController: UITableViewController {
                            forCellReuseIdentifier: SearchTableViewCell.reuseID)
         tableView.register(CityTableViewCell.self,
                            forCellReuseIdentifier: CityTableViewCell.reuseID)
-//        tableView.estimatedRowHeight = 200
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.allowsSelection = false
     }
     
     private func setConstraints() {
@@ -72,12 +69,11 @@ final class CityListViewController: UITableViewController {
         navBar?.isTranslucent = false
         navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        // remove the back button text:
+        // remove the back button text
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
                                                            style: .plain,
                                                            target: nil,
                                                            action: nil)
-//        self.navigationController?.navigationBar.setNeedsLayout()
     }
     
     private func showSpinner() {

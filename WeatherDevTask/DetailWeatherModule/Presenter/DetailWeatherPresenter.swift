@@ -179,7 +179,9 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
     }
     
     private func fillOtherParametersViewDataWith(_ weatherData: OneCallWeatherData) {
+        // set titles
         otherParametersViewData = Constants.otherParametersDefaultArray
+        
         // fill sunrise/sunset
         if let sunrise = weatherData.current.sunrise {
             let sunriseTime = self.dateConverter.convertingUTCtime(sunrise).currentTime(weatherData.timezoneOffset)

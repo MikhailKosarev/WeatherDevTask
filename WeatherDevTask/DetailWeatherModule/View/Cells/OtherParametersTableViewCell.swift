@@ -20,7 +20,6 @@ final class OtherParametersTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "SUNRISE"
         label.alpha = 0.5
         return label
     }()
@@ -30,7 +29,6 @@ final class OtherParametersTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 28, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "07:05"
         return label
     }()
     
@@ -39,7 +37,6 @@ final class OtherParametersTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 13, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "SUNSET"
         label.alpha = 0.5
         return label
     }()
@@ -49,7 +46,6 @@ final class OtherParametersTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 28, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "19:05"
         return label
     }()
     

@@ -166,7 +166,6 @@
 		74D603262940C4F600643900 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				74D603312940D4D200643900 /* Constants.swift */,
 				74D6031A2940BFFA00643900 /* Assets.xcassets */,
 				74D6031C2940BFFA00643900 /* LaunchScreen.storyboard */,
 				74D6031F2940BFFA00643900 /* Info.plist */,
@@ -271,6 +270,7 @@
 				7412E8CB29450CFC00E10367 /* DateConverter.swift */,
 				7485FC33294642F0005C1428 /* WeatherImageConverter.swift */,
 				7485FC36294658FC005C1428 /* TemperatureFormatter.swift */,
+				74D603312940D4D200643900 /* Constants.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";

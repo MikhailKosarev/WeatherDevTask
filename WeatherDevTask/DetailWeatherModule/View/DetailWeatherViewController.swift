@@ -85,7 +85,6 @@ final class DetailWeatherViewController: UIViewController {
         navBar?.barStyle = .black
         navBar?.isTranslucent = true
         navBar?.tintColor = .white
-//        self.navigationController?.navigationBar.setNeedsLayout()
     }
     
     private func setConstraints() {

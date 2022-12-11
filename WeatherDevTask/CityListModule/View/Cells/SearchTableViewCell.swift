@@ -58,7 +58,6 @@ final class SearchTableViewCell: UITableViewCell {
     
     private func setConstraints() {
         // set margins
-//        contentView.layoutMargins = .init(top: 0.0, left: 8.0, bottom: 0.0, right: 8.0)
         contentView.preservesSuperviewLayoutMargins = false
         let margins = contentView.layoutMarginsGuide
     
@@ -75,8 +74,6 @@ final class SearchTableViewCell: UITableViewCell {
     
     @objc private func searchTextChanged(_ sender: UISearchTextField) {
         guard let text = sender.text else { return }
-//        print(text)
-//        print("text changed")
         delegate?.searchTextChanged(searchText: text)
     }
 }

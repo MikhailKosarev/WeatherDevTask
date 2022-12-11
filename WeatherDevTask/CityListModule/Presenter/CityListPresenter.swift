@@ -42,7 +42,8 @@ final class CityListPresenter: CityListPresenterProtocol {
     var networkService: NetworkServiceProtocol
     
     let locationGeocoder = LocationGeocoder()
-    let citiesArray = ["Warsaw", "Bucharest", "Budapest"]
+    let citiesArray = ["Warsaw", "Bucharest", "Budapest", "Martuni", "Karmie", "Munich", "Gdansk", "Porto Alegre", "Subang Jaya", "Valencia"]
+//    let citiesArray = ["Warsaw","Bucharest","Martuni"]
     var weatherDataArray = [CityCurrentWeatherViewData]()
     var filteredWeatherDataArray = [CityCurrentWeatherViewData]()
     let dateConverter = DateConverter()
