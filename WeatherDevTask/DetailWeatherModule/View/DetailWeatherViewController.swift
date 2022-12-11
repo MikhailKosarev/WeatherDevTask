@@ -21,6 +21,13 @@ final class DetailWeatherViewController: UIViewController {
         return tableView
     }()
     
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     // MARK: - Private properties
     
     private let currentForecastView = CurrentForecastView()
@@ -37,6 +44,7 @@ final class DetailWeatherViewController: UIViewController {
         setupView()
         setupWeatherTableView()
         setConstraints()
+        showSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +59,7 @@ final class DetailWeatherViewController: UIViewController {
         view.backgroundColor = #colorLiteral(red: 0.3048475683, green: 0.598276794, blue: 0.8936008811, alpha: 1)
         view.addSubview(currentForecastView)
         view.addSubview(weatherTableView)
+        view.addSubview(activityIndicator)
     }
     
     private func setupWeatherTableView() {
@@ -93,7 +102,19 @@ final class DetailWeatherViewController: UIViewController {
                                                   constant: 50),
             weatherTableView.trailingAnchor.constraint(equalTo: safeArea.trailingAnchor),
             weatherTableView.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor),
+            
+            // activityIndicator
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
         ])
+    }
+    
+    private func showSpinner() {
+        activityIndicator.startAnimating()
+    }
+    
+    private func hideSpinner() {
+        activityIndicator.stopAnimating()
     }
 }
 
@@ -196,21 +217,26 @@ extension DetailWeatherViewController: DetailWeatherViewProtocol {
     func reloadCurrentForecastView() {
         guard let viewData = presenter?.currentForecastData else { return }
         currentForecastView.configureWith(viewData)
+        hideSpinner()
     }
     
     func reloadHourlyForecastSection() {
         weatherTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        hideSpinner()
     }
     
     func reloadDailyForecastSection() {
         weatherTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+        hideSpinner()
     }
     
     func reloadTodaysDescriptionSection() {
         weatherTableView.reloadSections(IndexSet(integer: 2), with: .automatic)
+        hideSpinner()
     }
     
     func reloadOtherParametersSection() {
         weatherTableView.reloadSections(IndexSet(integer: 3), with: .automatic)
+        hideSpinner()
     }
 }
