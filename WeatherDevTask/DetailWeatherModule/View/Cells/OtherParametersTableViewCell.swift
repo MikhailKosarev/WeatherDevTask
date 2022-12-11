@@ -15,7 +15,7 @@ final class OtherParametersTableViewCell: UITableViewCell {
     
     // MARK: - UI properties
     
-    private let leftParameterNameLabel: UILabel = {
+    private let leftTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 13, weight: .regular)
@@ -25,7 +25,7 @@ final class OtherParametersTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let leftParameterValueLabel: UILabel = {
+    private let leftValueLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 28, weight: .regular)
@@ -34,7 +34,7 @@ final class OtherParametersTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let rightParameterNameLabel: UILabel = {
+    private let rightTitleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 13, weight: .regular)
@@ -44,7 +44,7 @@ final class OtherParametersTableViewCell: UITableViewCell {
         return label
     }()
     
-    private let rightParameterValueLabel: UILabel = {
+    private let rightValueLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 28, weight: .regular)
@@ -53,25 +53,25 @@ final class OtherParametersTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var leftParametersStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [leftParameterNameLabel,
-                                                       leftParameterValueLabel])
+    private lazy var leftStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [leftTitleLabel,
+                                                       leftValueLabel])
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
-    private lazy var rightParametersStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [rightParameterNameLabel,
-                                                       rightParameterValueLabel])
+    private lazy var rightStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [rightTitleLabel,
+                                                       rightValueLabel])
         stackView.axis = .vertical
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
     }()
     
     private lazy var otherParametersStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [leftParametersStackView,
-                                                      rightParametersStackView])
+        let stackView = UIStackView(arrangedSubviews: [leftStackView,
+                                                      rightStackView])
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -109,6 +109,15 @@ final class OtherParametersTableViewCell: UITableViewCell {
             otherParametersStackView.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             otherParametersStackView.centerYAnchor.constraint(equalTo: layoutMarginsGuide.centerYAnchor)
         ])
+    }
+    
+    // MARK: - Internal methods
+    
+    func configureWith(viewData: OtherParametersViewData) {
+        leftTitleLabel.text = viewData.leftTitle
+        leftValueLabel.text = viewData.leftValue
+        rightTitleLabel.text = viewData.rightTitle
+        rightValueLabel.text = viewData.rightValue
     }
 }
 
