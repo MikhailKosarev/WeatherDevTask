@@ -20,16 +20,16 @@ final class CityTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "16:07"
+//        label.text = "16:07"
         return label
     }()
     
-    private let cityNameLabel: UILabel = {
+    let cityNameLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 25, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Warsaw"
+//        label.text = "Warsaw"
         return label
     }()
     
@@ -46,7 +46,7 @@ final class CityTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 50, weight: .thin)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "2°"
+//        label.text = "2°"
         label.textAlignment = .right
         return label
     }()
@@ -125,6 +125,6 @@ final class CityTableViewCell: UITableViewCell {
         currentTimeLabel.text = viewData.currentTime
         cityNameLabel.text = viewData.cityName
         weatherImageView.image = viewData.weatherImage
-        temperatureLabel.text = viewData.temperatureString
+        temperatureLabel.text = viewData.temperature
     }
 }
