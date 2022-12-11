@@ -94,6 +94,7 @@ final class CityTableViewCell: UITableViewCell {
     
     private func setupView() {
         backgroundColor = .black
+        selectionStyle = .none
         contentView.addSubview(mainStackView)
     }
     

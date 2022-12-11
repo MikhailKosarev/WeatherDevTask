@@ -9,6 +9,15 @@ import UIKit
 
 final class CityListViewController: UITableViewController {
     
+    // MARK: - UI elements
+    
+    private let activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(style: .large)
+        activityIndicator.color = .white
+        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+        return activityIndicator
+    }()
+    
     // MARK: - Internal properties
     
     var presenter: CityListPresenterProtocol?
@@ -19,7 +28,9 @@ final class CityListViewController: UITableViewController {
         super.viewDidLoad()
         setupView()
         setupTableView()
+        setConstraints()
         presenter?.getWeather()
+        showSpinner()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -32,6 +43,7 @@ final class CityListViewController: UITableViewController {
     private func setupView() {
         title = "Weather"
         view.backgroundColor = .black
+        view.addSubview(activityIndicator)
     }
     
     private func setupTableView() {
@@ -42,6 +54,14 @@ final class CityListViewController: UITableViewController {
 //        tableView.estimatedRowHeight = 200
 //        tableView.rowHeight = UITableView.automaticDimension
 //        tableView.allowsSelection = false
+    }
+    
+    private func setConstraints() {
+        NSLayoutConstraint.activate([
+            // activityIndicator
+            activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+        ])
     }
     
     private func updateNavBarColor() {
@@ -58,6 +78,14 @@ final class CityListViewController: UITableViewController {
                                                            target: nil,
                                                            action: nil)
 //        self.navigationController?.navigationBar.setNeedsLayout()
+    }
+    
+    private func showSpinner() {
+        activityIndicator.startAnimating()
+    }
+    
+    private func hideSpinner() {
+        activityIndicator.stopAnimating()
     }
 
     // MARK: - Table view data source
@@ -127,5 +155,6 @@ extension CityListViewController: CitySearchDelegateProtocol {
 extension CityListViewController: CityListViewProtocol {
     func reloadCityListSection() {
         tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+        hideSpinner()
     }
 }
