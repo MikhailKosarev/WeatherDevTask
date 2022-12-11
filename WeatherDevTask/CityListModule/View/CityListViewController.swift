@@ -9,20 +9,10 @@ import UIKit
 
 final class CityListViewController: UITableViewController {
     
-    // MARK: - UI elements
-    
-    private let citySearchField: UISearchTextField = {
-        let searchTextField = UISearchTextField()
-        searchTextField.placeholder = "Search"
-        searchTextField.translatesAutoresizingMaskIntoConstraints = false
-        return searchTextField
-    }()
-    
     // MARK: - Internal properties
     
     var presenter: CityListPresenterProtocol?
     
-
     // MARK: - Life cycle
     
     override func viewDidLoad() {
@@ -78,11 +68,15 @@ final class CityListViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
+        // search section
         case 0:
             return 1
+        // city list section
+        case 1:
+            return presenter?.getNumberOfCities() ?? 0
+        // default case
         default:
-            return presenter?.weatherDataArray.count ?? 0
-
+            return 0
         }
     }
 
@@ -90,36 +84,48 @@ final class CityListViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
+        // search section
         case 0:
-            return tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID,
-                                                     for: indexPath)
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID,
+                                                           for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
+            cell.delegate = self
+            return cell
+        // city list section
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseID,
                                                      for: indexPath) as! CityTableViewCell
-            guard let viewData = presenter?.weatherDataArray[indexPath.row] else { return UITableViewCell() }
-
+            guard let viewData = presenter?.filteredWeatherDataArray[indexPath.row] else {
+                return UITableViewCell()
+            }
             cell.configureWith(viewData)
             return cell
-            
+        // default case
         default:
             return UITableViewCell()
         }
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let detailWeatherViewController = ModuleBulder.createDetailWeatherModule()
+        guard let cell = tableView.cellForRow(at: indexPath) as? CityTableViewCell,
+              let cityName = cell.cityNameLabel.text else { return }
+        
+        let detailWeatherViewController = ModuleBulder.createDetailWeatherModule(currentCity: cityName)
         navigationController?.pushViewController(detailWeatherViewController, animated: true)
+    }
+}
+
+// MARK: - CitySearchDelegateProtocol
+
+extension CityListViewController: CitySearchDelegateProtocol {
+    func searchTextChanged(searchText: String) {
+        presenter?.filterCitiesStarting(with: searchText)
     }
 }
 
 // MARK: - CityListViewProtocol
 
 extension CityListViewController: CityListViewProtocol {
-    func reloadTableView() {
-        tableView.reloadData()
-    }
-    
-    func loadWeather(viewData: CityCurrentWeatherViewData) {
-//        print("loading weather")
+    func reloadCityListSection() {
+        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
     }
 }
