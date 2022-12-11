@@ -89,6 +89,6 @@ final class HourlyForecastCollectionViewCell: UICollectionViewCell {
     func configureWith(_ viewData: HourlyForecastViewData) {
         timeLabel.text = viewData.time
         weatherImageView.image = viewData.weatherImage
-        temperatureLabel.text = viewData.temperatureString
+        temperatureLabel.text = viewData.temperature
     }
 }
