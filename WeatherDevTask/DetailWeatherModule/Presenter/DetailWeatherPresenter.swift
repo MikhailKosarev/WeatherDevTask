@@ -18,7 +18,7 @@ protocol DetailWeatherViewProtocol: UIViewController {
 // MARK: - DetailWeatherPresenterProtocol
 
 protocol DetailWeatherPresenterProtocol: AnyObject {
-    var currentCity: String { get set }
+//    var currentCity: String { get set }
     var currentForecastData: CurrentForecastViewData? { get set }
     var hourlyForecastData: [HourlyForecastViewData] { get set }
     var dailyForecastData: [DailyForecastViewData] { get set }
@@ -27,7 +27,7 @@ protocol DetailWeatherPresenterProtocol: AnyObject {
     
     init(view: DetailWeatherViewProtocol, networkService: NetworkServiceProtocol)
     
-    func getWeatherFor(city: String)
+    func getWeatherFor(city: String?)
 }
 
 // MARK: - CityListPresenter
@@ -40,7 +40,7 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
     var networkService: NetworkServiceProtocol
     
     let locationGeocoder = LocationGeocoder()
-    var currentCity = "Paris"
+//    var currentCity = "Paris"
     var currentForecastData: CurrentForecastViewData?
     var hourlyForecastData = [HourlyForecastViewData]()
     var dailyForecastData = [DailyForecastViewData]()
@@ -58,7 +58,8 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
     
     // MARK: - Internal methods
     
-    func getWeatherFor(city: String) {
+    func getWeatherFor(city: String?) {
+        guard let city else { return }
         locationGeocoder.getCoordinateOf(city) { coordinate, error in
             guard let coordinate = coordinate, error == nil else { return }
             self.networkService.getWeatherData(lon: String(coordinate.longitude),

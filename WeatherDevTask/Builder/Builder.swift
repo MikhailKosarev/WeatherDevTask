@@ -21,10 +21,11 @@ final class ModuleBulder: Builder {
         return navigationController
     }
     
-    static func createDetailWeatherModule() -> UIViewController {
+    static func createDetailWeatherModule(currentCity: String) -> UIViewController {
         let view = DetailWeatherViewController()
         let networkService = NetworkService()
         let presenter = DetailWeatherPresenter(view: view, networkService: networkService)
+        view.currentCity = currentCity
         view.presenter = presenter
         return view
     }

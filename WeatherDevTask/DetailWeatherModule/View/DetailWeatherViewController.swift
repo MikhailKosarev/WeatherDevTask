@@ -29,7 +29,7 @@ final class DetailWeatherViewController: UIViewController {
     // MARK: - Internal properties
     
     var presenter: DetailWeatherPresenterProtocol?
-    var currentCity = "Paris"
+    var currentCity: String?
     
     // MARK: - Life cycle
     
