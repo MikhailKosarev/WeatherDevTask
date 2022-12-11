@@ -9,7 +9,7 @@ import UIKit
 
 final class DetailWeatherViewController: UIViewController {
     
-    private let currentForecastView = CurrentForecastView()
+    // MARK: - UI elements
     
     private let weatherTableView: UITableView = {
         let tableView = UITableView()
@@ -21,6 +21,15 @@ final class DetailWeatherViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    // MARK: - Private properties
+    
+    private let currentForecastView = CurrentForecastView()
+    
+    // MARK: - Internal properties
+    
+    var presenter: DetailWeatherPresenterProtocol?
+    var currentCity = "Paris"
     
     // MARK: - Life cycle
     
@@ -34,6 +43,7 @@ final class DetailWeatherViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         updateNavBarColor()
+        presenter?.getWeatherFor(city: currentCity)
     }
     
     // MARK: - Private methods
@@ -96,11 +106,11 @@ extension DetailWeatherViewController: UITableViewDataSource {
         case 0:
             return 1
         case 1:
-            return 7
+            return presenter?.dailyForecastData.count ?? 0
         case 2:
             return 1
         case 3:
-            return 5
+            return presenter?.otherParametersViewData.count ?? 0
         default:
             return 0
         }
@@ -108,21 +118,35 @@ extension DetailWeatherViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
+        // HourlyForecastTableViewCell
         case 0:
-            let cell = weatherTableView.dequeueReusableCell(withIdentifier: HourlyForecastTableViewCell.reuseID,
-                                                            for: indexPath)
+            guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: HourlyForecastTableViewCell.reuseID,
+                                                                  for: indexPath) as? HourlyForecastTableViewCell else {
+                return UITableViewCell()
+            }
+            guard let hourlyForecastViewData = presenter?.hourlyForecastData else { return UITableViewCell() }
+            cell.configureWith(viewData: hourlyForecastViewData)
             return cell
+        // DailyForecastTableViewCell
         case 1:
-            let cell = weatherTableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.reuseID,
-                                                            for: indexPath)
+            guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.reuseID,
+                                                            for: indexPath) as? DailyForecastTableViewCell else { return UITableViewCell() }
+            guard let dailyForecastViewData = presenter?.dailyForecastData[indexPath.row] else { return UITableViewCell() }
+            cell.configureWith(viewData: dailyForecastViewData)
             return cell
+        // TodaysDescriptionTableViewCell
         case 2:
-            let cell = weatherTableView.dequeueReusableCell(withIdentifier: TodaysDescriptionTableViewCell.reuseID,
-                                                            for: indexPath)
+            guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: TodaysDescriptionTableViewCell.reuseID,
+                                                                  for: indexPath) as? TodaysDescriptionTableViewCell else { return UITableViewCell() }
+            guard let todaysDescriptionViewData = presenter?.todaysDescriptionData else { return UITableViewCell() }
+            cell.configureWith(viewData: todaysDescriptionViewData)
             return cell
+        // OtherParametersTableViewCell
         case 3:
-            let cell = weatherTableView.dequeueReusableCell(withIdentifier: OtherParametersTableViewCell.reuseID,
-                                                            for: indexPath)
+            guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: OtherParametersTableViewCell.reuseID,
+                                                                  for: indexPath)  as? OtherParametersTableViewCell else { return UITableViewCell() }
+            guard let otherParametersViewData = presenter?.otherParametersViewData else { return UITableViewCell() }
+            cell.configureWith(viewData: otherParametersViewData[indexPath.row])
             return cell
         default:
             return UITableViewCell()
@@ -159,5 +183,20 @@ extension DetailWeatherViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         currentForecastView.setDescriptionFull(offset <= 20)
+    }
+}
+
+// MARK: - DetailWeatherViewProtocol
+
+extension DetailWeatherViewController: DetailWeatherViewProtocol {
+    func reloadTableView() {
+        
+        
+        weatherTableView.reloadData()
+    }
+    
+    func reloadCurrentForecastView() {
+        guard let viewData = presenter?.currentForecastData else { return }
+        currentForecastView.configureWith(viewData)
     }
 }
