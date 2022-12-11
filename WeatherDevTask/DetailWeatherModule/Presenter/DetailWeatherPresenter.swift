@@ -11,7 +11,10 @@ import UIKit
 
 protocol DetailWeatherViewProtocol: UIViewController {
     func reloadCurrentForecastView()
-    func reloadTableView()
+    func reloadHourlyForecastSection()
+    func reloadDailyForecastSection()
+    func reloadTodaysDescriptionSection()
+    func reloadOtherParametersSection()
 }
 
 // MARK: - DetailWeatherPresenterProtocol
@@ -66,30 +69,25 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
                                                lat: String(coordinate.latitude)) { result in
                 switch result {
                 case .success(let weatherData):
-//                     get current time
-//                                        let currentTime = self.dateConverter.convertingUTCtime(weatherData.current.dt)
-//                                            .currentTime(weatherData.timezoneOffset)
-//                                        print(currentTime)
-//
-//                  // fill currentWeatherViewData
+                    // fill currentWeatherViewData
                     self.fillCurrentForecastViewDataWith(weatherData, city: city)
                     self.view?.reloadCurrentForecastView()
-
+                    
                     // fill hourlyForecastViewData
                     self.fillHourlyForecastViewDataWith(weatherData, hours: 24)
+                    self.view?.reloadHourlyForecastSection()
                     
                     // fill weeklyForecastData
                     self.fillDailyForecastViewDataWith(weatherData, days: 8)
+                    self.view?.reloadDailyForecastSection()
                     
                     // fill todaysDescription
                     self.fillTodaysDescriptionViewDataWith(weatherData)
-
+                    self.view?.reloadTodaysDescriptionSection()
+                    
                     // fill otherParametersData
                     self.fillOtherParametersViewDataWith(weatherData)
- 
-                    // MARK: - reloadTableView()
-                    self.view?.reloadTableView()
-                    
+                    self.view?.reloadOtherParametersSection()
                 case .failure(let error):
                     print(error)
                 }
@@ -102,10 +100,10 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
     private func fillCurrentForecastViewDataWith(_ weatherData: OneCallWeatherData,
                                                  city: String) {
         self.currentForecastData = CurrentForecastViewData(cityName: city,
-                                                         currentTemperature: weatherData.current.temp,
+                                                           currentTemperature: weatherData.current.temp,
                                                            weatherDescription: weatherData.current.weather[0].main,
-                                                         highTemperature: weatherData.daily[0].temp.max,
-                                                         lowTemperature: weatherData.daily[0].temp.min)
+                                                           highTemperature: weatherData.daily[0].temp.max,
+                                                           lowTemperature: weatherData.daily[0].temp.min)
     }
     
     private func fillHourlyForecastViewDataWith(_ weatherData: OneCallWeatherData,

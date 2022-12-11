@@ -189,14 +189,24 @@ extension DetailWeatherViewController: UIScrollViewDelegate {
 // MARK: - DetailWeatherViewProtocol
 
 extension DetailWeatherViewController: DetailWeatherViewProtocol {
-    func reloadTableView() {
-        
-        
-        weatherTableView.reloadData()
-    }
-    
     func reloadCurrentForecastView() {
         guard let viewData = presenter?.currentForecastData else { return }
         currentForecastView.configureWith(viewData)
+    }
+    
+    func reloadHourlyForecastSection() {
+        weatherTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
+    
+    func reloadDailyForecastSection() {
+        weatherTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+    }
+    
+    func reloadTodaysDescriptionSection() {
+        weatherTableView.reloadSections(IndexSet(integer: 2), with: .automatic)
+    }
+    
+    func reloadOtherParametersSection() {
+        weatherTableView.reloadSections(IndexSet(integer: 3), with: .automatic)
     }
 }
