@@ -103,14 +103,19 @@ final class DetailWeatherViewController: UIViewController {
 extension DetailWeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
+        // hourlyForecastData section
         case 0:
-            return 1
+            return presenter?.getNumberOfHourlyForecastRows() ?? 0
+        // dailyForecastData section
         case 1:
-            return presenter?.dailyForecastData.count ?? 0
+            return presenter?.getNumberOfDailyForecastRows() ?? 0
+        // todaysDescriptionData section
         case 2:
-            return 1
+            return presenter?.getNumberOfTodaysDescriptionRows() ?? 0
+        // otherParametersViewData section
         case 3:
-            return presenter?.otherParametersViewData.count ?? 0
+            return presenter?.getNumberOfOtherParametersRows() ?? 0
+        // default case
         default:
             return 0
         }

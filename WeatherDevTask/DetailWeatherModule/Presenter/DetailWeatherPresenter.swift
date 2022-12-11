@@ -31,6 +31,10 @@ protocol DetailWeatherPresenterProtocol: AnyObject {
     init(view: DetailWeatherViewProtocol, networkService: NetworkServiceProtocol)
     
     // methods
+    func getNumberOfHourlyForecastRows() -> Int
+    func getNumberOfDailyForecastRows() -> Int
+    func getNumberOfTodaysDescriptionRows() -> Int
+    func getNumberOfOtherParametersRows() -> Int
     func getWeatherFor(city: String?)
 }
 
@@ -60,6 +64,23 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
     }
     
     // MARK: - Internal methods
+    func getNumberOfHourlyForecastRows() -> Int {
+        // always one row with collectionView
+        return hourlyForecastData.isEmpty ? 0 : 1
+    }
+    
+    func getNumberOfDailyForecastRows() -> Int {
+        return dailyForecastData.count
+    }
+    
+    func getNumberOfTodaysDescriptionRows() -> Int {
+        // always one row
+        return todaysDescriptionData == nil ? 0 : 1
+    }
+    
+    func getNumberOfOtherParametersRows() -> Int {
+        return otherParametersViewData.count
+    }
     
     func getWeatherFor(city: String?) {
         guard let city else { return }
