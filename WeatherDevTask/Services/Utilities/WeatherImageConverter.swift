@@ -1,23 +1,14 @@
 //
-//  CityCurrentWeatherViewData.swift
+//  WeatherImageConverter.swift
 //  WeatherDevTask
 //
-//  Created by Mikhail on 09.12.2022.
+//  Created by Mikhail on 11.12.2022.
 //
 
 import UIKit
 
-struct CityCurrentWeatherViewData {
-    let currentTime: String
-    let cityName: String
-    let temperature: Double
-    let conditionId: Int
-    
-    var temperatureString: String {
-        return String(format: "%.0f", temperature) + "°"
-    }
-    
-    var weatherImage: UIImage? {
+struct WeatherImageConverter {
+    static func getImage(from conditionId: Int) -> UIImage? {
         switch conditionId {
         // Group 2xx: Thunderstorm
         case 200...202, 230...232:

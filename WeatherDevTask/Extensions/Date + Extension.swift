@@ -25,7 +25,7 @@ extension Date {
     
     func currentTime(_ timezone: Int ) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "hh:mm"
+        dateFormatter.dateFormat = "HH:mm"
         dateFormatter.timeZone = TimeZone(secondsFromGMT: timezone)
         return dateFormatter.string(from: self)
     }
