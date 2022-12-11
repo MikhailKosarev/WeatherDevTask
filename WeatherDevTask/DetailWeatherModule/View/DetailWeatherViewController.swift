@@ -146,26 +146,26 @@ extension DetailWeatherViewController: UITableViewDataSource {
                                                                   for: indexPath) as? HourlyForecastTableViewCell else {
                 return UITableViewCell()
             }
-            guard let hourlyForecastViewData = presenter?.hourlyForecastData else { return UITableViewCell() }
+            guard let hourlyForecastViewData = presenter?.getHourlyForecastData() else { return UITableViewCell() }
             cell.configureWith(viewData: hourlyForecastViewData)
             return cell
         case .dailyForecast:
             guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.reuseID,
                                                             for: indexPath) as? DailyForecastTableViewCell else { return UITableViewCell() }
-            guard let dailyForecastViewData = presenter?.dailyForecastData[indexPath.row] else { return UITableViewCell() }
+            guard let dailyForecastViewData = presenter?.getDailyForecastDataFor(indexPath.row) else { return UITableViewCell() }
             cell.configureWith(viewData: dailyForecastViewData)
             return cell
         case .todaysDescription:
             guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: TodaysDescriptionTableViewCell.reuseID,
                                                                   for: indexPath) as? TodaysDescriptionTableViewCell else { return UITableViewCell() }
-            guard let todaysDescriptionViewData = presenter?.todaysDescriptionData else { return UITableViewCell() }
+            guard let todaysDescriptionViewData = presenter?.getTodaysDescriptionData() else { return UITableViewCell() }
             cell.configureWith(viewData: todaysDescriptionViewData)
             return cell
         case .otherParameters:
             guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: OtherParametersTableViewCell.reuseID,
                                                                   for: indexPath)  as? OtherParametersTableViewCell else { return UITableViewCell() }
-            guard let otherParametersViewData = presenter?.otherParametersViewData else { return UITableViewCell() }
-            cell.configureWith(viewData: otherParametersViewData[indexPath.row])
+            guard let otherParametersViewData = presenter?.getOtherParametersViewDataFor(indexPath.row) else { return UITableViewCell() }
+            cell.configureWith(viewData: otherParametersViewData)
             return cell
         }
     }
@@ -208,7 +208,7 @@ extension DetailWeatherViewController: UIScrollViewDelegate {
 
 extension DetailWeatherViewController: DetailWeatherViewProtocol {
     func reloadCurrentForecastView() {
-        guard let viewData = presenter?.currentForecastData else { return }
+        guard let viewData = presenter?.currentForecastViewData else { return }
         currentForecastView.configureWith(viewData)
         hideSpinner()
     }
