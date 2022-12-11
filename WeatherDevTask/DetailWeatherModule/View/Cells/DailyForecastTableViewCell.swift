@@ -53,7 +53,7 @@ final class DailyForecastTableViewCell: UITableViewCell {
         let label = UILabel()
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
-        label.translatesAutoresizingMaskIntoConstraints = fals
+        label.translatesAutoresizingMaskIntoConstraints = false
         label.alpha = 0.5
         label.textAlignment = .right
         return label

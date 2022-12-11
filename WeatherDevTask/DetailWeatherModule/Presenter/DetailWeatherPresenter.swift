@@ -161,7 +161,7 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
             // get day of week
             let dayOfWeek = self.dateConverter.convertingUTCtime(daily.dt).dtToDayOfWeek(weatherData.timezoneOffset)
             let weatherImage = WeatherImageConverter.getImage(from: daily.weather[0].id)
-            let humidity = "\(daily.humidity)%"
+            let humidity = String(daily.humidity) + Units.percentage
             let dayTemperature = TemperatureFormatter.getStringTemperatureWithoutDegreeSignFrom(daily.temp.day)
             let nightTemperature = TemperatureFormatter.getStringTemperatureWithoutDegreeSignFrom(daily.temp.night)
             // fill data
@@ -187,34 +187,34 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
             let sunriseTime = self.dateConverter.convertingUTCtime(sunrise).currentTime(weatherData.timezoneOffset)
             self.otherParametersViewData[0].leftValue = sunriseTime
         } else {
-            self.otherParametersViewData[0].leftValue = "no data"
+            self.otherParametersViewData[0].leftValue = Units.noData
         }
         
         if let sunset = weatherData.current.sunset {
             let sunsetTime = self.dateConverter.convertingUTCtime(sunset).currentTime(weatherData.timezoneOffset)
             self.otherParametersViewData[0].rightValue = sunsetTime
         } else {
-            self.otherParametersViewData[0].rightValue = "no data"
+            self.otherParametersViewData[0].rightValue = Units.noData
         }
         
         // fill chance of rain/humidity
-        self.otherParametersViewData[1].leftValue = "no data"
-        let humidity = String(weatherData.current.humidity) + "%"
+        self.otherParametersViewData[1].leftValue = Units.noData
+        let humidity = String(weatherData.current.humidity) + Units.percentage
         self.otherParametersViewData[1].rightValue = humidity
         
         // fill wind/feels like
-        let wind = String(weatherData.current.windSpeed) + " m/s"
+        let wind = String(weatherData.current.windSpeed) + " " + Units.metreSec
         self.otherParametersViewData[2].leftValue = wind
         let feelsLike = TemperatureFormatter.getStringTemperatureFrom(weatherData.current.feelsLike)
         self.otherParametersViewData[2].rightValue = feelsLike
         
         // fill precipitation/pressure
-        self.otherParametersViewData[3].leftValue = "no data"
-        let pressure = String(weatherData.current.pressure) + "hPa"
+        self.otherParametersViewData[3].leftValue = Units.noData
+        let pressure = String(weatherData.current.pressure) + Units.hPa
         self.otherParametersViewData[3].rightValue = pressure
         
         // fill visibility/uv index
-        let visibility = String(weatherData.current.visibility / 1000) + " km"
+        let visibility = String(weatherData.current.visibility / 1000) + " " + Units.kilometers
         self.otherParametersViewData[4].leftValue = visibility
         let uvIndex = String(weatherData.current.uvi)
         self.otherParametersViewData[4].rightValue = uvIndex
