@@ -105,8 +105,7 @@ final class CityListPresenter: CityListPresenterProtocol {
             .currentTime(weatherData.timezoneOffset)
         // fill viewData
         guard let weatherImage = WeatherImageConverter.getImage(from: weatherData.current.weather[0].id) else { return }
-        let temperature = String(format: "%.0f", weatherData.current.temp) + "°"
-            .replacingOccurrences(of: "-0", with: "0")
+        let temperature = TemperatureFormatter.getStringTemperatureFrom(weatherData.current.temp)
         let viewData = CityCurrentWeatherViewData(currentTime: currentTime,
                                                   cityName: city,
                                                   temperature: temperature,

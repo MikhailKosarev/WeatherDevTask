@@ -120,11 +120,17 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
     
     private func fillCurrentForecastViewDataWith(_ weatherData: OneCallWeatherData,
                                                  city: String) {
+        let currentTemperature = TemperatureFormatter.getStringTemperatureFrom(weatherData.current.temp)
+        let highTemperature = TemperatureFormatter.getStringTemperatureFrom(weatherData.daily[0].temp.max)
+        let lowTemperature = TemperatureFormatter.getStringTemperatureFrom(weatherData.daily[0].temp.min)
+        let highLowTemperature = "H:" + highTemperature + " L:" + lowTemperature
+        let shortWeatherDescription = currentTemperature + " | " + weatherData.current.weather[0].main
+        
         self.currentForecastData = CurrentForecastViewData(cityName: city,
-                                                           currentTemperature: weatherData.current.temp,
+                                                           currentTemperature: currentTemperature,
                                                            weatherDescription: weatherData.current.weather[0].main,
-                                                           highTemperature: weatherData.daily[0].temp.max,
-                                                           lowTemperature: weatherData.daily[0].temp.min)
+                                                           highLowTemperature: highLowTemperature,
+                                                           shortWeatherDescription: shortWeatherDescription)
     }
     
     private func fillHourlyForecastViewDataWith(_ weatherData: OneCallWeatherData,

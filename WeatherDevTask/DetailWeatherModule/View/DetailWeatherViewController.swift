@@ -16,7 +16,6 @@ final class DetailWeatherViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
         tableView.allowsSelection = false
-//        tableView.bounces = true
         tableView.separatorColor = .white.withAlphaComponent(0.3)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView

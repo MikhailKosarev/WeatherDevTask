@@ -113,20 +113,13 @@ final class CurrentForecastView: UIView {
     func setDescriptionFull(_ tumbler: Bool) {
         isDescriptionFull = tumbler
         configureDescription()
-        //        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: {
-        //            self.configureDescription()
-        //        }, completion: nil)
-        //        UIView.animate(withDuration: 2.0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0,
-        //        options: [], animations: {
-        //        self.configureDescription() }, completion: nil)
-        //        configureDescription()
     }
     
     func configureWith(_ viewData: CurrentForecastViewData) {
         cityNameLabel.text = viewData.cityName
-        temperatureLabel.text = viewData.currentTemperatureString
+        temperatureLabel.text = viewData.currentTemperature
         weatherDescriptionLabel.text = viewData.weatherDescription
-        highLowLabel.text = viewData.highLowTemperatureString
+        highLowLabel.text = viewData.highLowTemperature
         shortWeatherDescriptionLabel.text = viewData.shortWeatherDescription
     }
     
