@@ -20,7 +20,7 @@ final class HourlyForecastCollectionViewCell: UICollectionViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 15, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "12pm"
+//        label.text = "12pm"
         return label
     }()
     
@@ -37,7 +37,7 @@ final class HourlyForecastCollectionViewCell: UICollectionViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .semibold)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "8°"
+//        label.text = "8°"
         return label
     }()
     
@@ -89,6 +89,6 @@ final class HourlyForecastCollectionViewCell: UICollectionViewCell {
     func configureWith(_ viewData: HourlyForecastViewData) {
         timeLabel.text = viewData.time
         weatherImageView.image = viewData.weatherImage
-        temperatureLabel.text = viewData.temperatureString
+        temperatureLabel.text = viewData.temperature
     }
 }

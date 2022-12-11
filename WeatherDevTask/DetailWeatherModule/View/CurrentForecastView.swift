@@ -16,7 +16,7 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 34, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "New York"
+//        label.text = "New York"
         return label
     }()
     
@@ -25,7 +25,7 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 96, weight: .thin)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "7°"
+//        label.text = "7°"
         return label
     }()
     
@@ -34,7 +34,7 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Mostly Cloudy"
+//        label.text = "Mostly Cloudy"
         return label
     }()
     
@@ -43,7 +43,7 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "H:8° L:0°"
+//        label.text = "H:8° L:0°"
         return label
     }()
     
@@ -52,7 +52,7 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "8° | Cloudy"
+//        label.text = "8° | Cloudy"
         return label
     }()
     
@@ -113,20 +113,13 @@ final class CurrentForecastView: UIView {
     func setDescriptionFull(_ tumbler: Bool) {
         isDescriptionFull = tumbler
         configureDescription()
-        //        UIView.animate(withDuration: 0.1, delay: 0, options: .curveEaseOut, animations: {
-        //            self.configureDescription()
-        //        }, completion: nil)
-        //        UIView.animate(withDuration: 2.0, delay: 0, usingSpringWithDamping: 0.2, initialSpringVelocity: 0,
-        //        options: [], animations: {
-        //        self.configureDescription() }, completion: nil)
-        //        configureDescription()
     }
     
     func configureWith(_ viewData: CurrentForecastViewData) {
         cityNameLabel.text = viewData.cityName
-        temperatureLabel.text = viewData.currentTemperatureString
+        temperatureLabel.text = viewData.currentTemperature
         weatherDescriptionLabel.text = viewData.weatherDescription
-        highLowLabel.text = viewData.highLowTemperatureString
+        highLowLabel.text = viewData.highLowTemperature
         shortWeatherDescriptionLabel.text = viewData.shortWeatherDescription
     }
     

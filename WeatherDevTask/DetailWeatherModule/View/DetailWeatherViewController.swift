@@ -16,7 +16,6 @@ final class DetailWeatherViewController: UIViewController {
         tableView.backgroundColor = .clear
         tableView.showsVerticalScrollIndicator = false
         tableView.allowsSelection = false
-//        tableView.bounces = true
         tableView.separatorColor = .white.withAlphaComponent(0.3)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
@@ -29,7 +28,7 @@ final class DetailWeatherViewController: UIViewController {
     // MARK: - Internal properties
     
     var presenter: DetailWeatherPresenterProtocol?
-    var currentCity = "Paris"
+    var currentCity: String?
     
     // MARK: - Life cycle
     
@@ -103,14 +102,19 @@ final class DetailWeatherViewController: UIViewController {
 extension DetailWeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
+        // hourlyForecastData section
         case 0:
-            return 1
+            return presenter?.getNumberOfHourlyForecastRows() ?? 0
+        // dailyForecastData section
         case 1:
-            return presenter?.dailyForecastData.count ?? 0
+            return presenter?.getNumberOfDailyForecastRows() ?? 0
+        // todaysDescriptionData section
         case 2:
-            return 1
+            return presenter?.getNumberOfTodaysDescriptionRows() ?? 0
+        // otherParametersViewData section
         case 3:
-            return presenter?.otherParametersViewData.count ?? 0
+            return presenter?.getNumberOfOtherParametersRows() ?? 0
+        // default case
         default:
             return 0
         }
@@ -189,14 +193,24 @@ extension DetailWeatherViewController: UIScrollViewDelegate {
 // MARK: - DetailWeatherViewProtocol
 
 extension DetailWeatherViewController: DetailWeatherViewProtocol {
-    func reloadTableView() {
-        
-        
-        weatherTableView.reloadData()
-    }
-    
     func reloadCurrentForecastView() {
         guard let viewData = presenter?.currentForecastData else { return }
         currentForecastView.configureWith(viewData)
+    }
+    
+    func reloadHourlyForecastSection() {
+        weatherTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+    }
+    
+    func reloadDailyForecastSection() {
+        weatherTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+    }
+    
+    func reloadTodaysDescriptionSection() {
+        weatherTableView.reloadSections(IndexSet(integer: 2), with: .automatic)
+    }
+    
+    func reloadOtherParametersSection() {
+        weatherTableView.reloadSections(IndexSet(integer: 3), with: .automatic)
     }
 }

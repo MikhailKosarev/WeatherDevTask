@@ -20,7 +20,7 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Tuesday"
+//        label.text = "Tuesday"
         return label
     }()
     
@@ -37,7 +37,7 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 13, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "80%"
+//        label.text = "80%"
         label.textColor = #colorLiteral(red: 0.4862745098, green: 0.8117647059, blue: 0.9764705882, alpha: 1)
         return label
     }()
@@ -47,7 +47,7 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "14"
+//        label.text = "14"
         label.textAlignment = .right
         return label
     }()
@@ -57,7 +57,7 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "4"
+//        label.text = "4"
         label.alpha = 0.5
         label.textAlignment = .right
         return label
@@ -142,9 +142,9 @@ final class DailyForecastTableViewCell: UITableViewCell {
     func configureWith(viewData: DailyForecastViewData) {
         dayTitleLabel.text = viewData.dayTitle
         weatherImageView.image = viewData.weatherImage
-        humidityLabel.text = viewData.humidityString
-        dayTemperatureLabel.text = viewData.dayTemperatureString
-        nightTemperatureLabel.text = viewData.nightTemperatureString
+        humidityLabel.text = viewData.humidity
+        dayTemperatureLabel.text = viewData.dayTemperature
+        nightTemperatureLabel.text = viewData.nightTemperature
     }
 }
 
