@@ -83,4 +83,12 @@ final class HourlyForecastCollectionViewCell: UICollectionViewCell {
             hourlyForecastStackView.centerXAnchor.constraint(equalTo: centerXAnchor)
         ])
     }
+    
+    // MARK: - Internal methods
+    
+    func configureWith(_ viewData: HourlyForecastViewData) {
+        timeLabel.text = viewData.time
+        weatherImageView.image = viewData.weatherImage
+        temperatureLabel.text = viewData.temperatureString
+    }
 }

@@ -20,7 +20,7 @@ final class TodaysDescriptionTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 17, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "Cloudy conditions will continue all day. Wind gusts are up ti 9 mph."
+//        label.text = "Cloudy conditions will continue all day. Wind gusts are up ti 9 mph."
         label.numberOfLines = 0
         return label
     }()
@@ -58,5 +58,11 @@ final class TodaysDescriptionTableViewCell: UITableViewCell {
             descriptionLabel.trailingAnchor.constraint(equalTo: layoutMarginsGuide.trailingAnchor),
             descriptionLabel.bottomAnchor.constraint(equalTo: layoutMarginsGuide.bottomAnchor),
         ])
+    }
+    
+    // MARK: - Internal methods
+    
+    func configureWith(viewData: TodaysDescriptionViewData) {
+        descriptionLabel.text = viewData.description
     }
 }

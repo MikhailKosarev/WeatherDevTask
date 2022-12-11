@@ -32,6 +32,10 @@ final class HourlyForecastTableViewCell: UITableViewCell {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
     }()
+    
+    // MARK: - Internal properties
+    
+    var viewData = [HourlyForecastViewData]()
 
     // MARK: - Initialization
 
@@ -71,28 +75,38 @@ final class HourlyForecastTableViewCell: UITableViewCell {
             hourlyForecastCollectionView.heightAnchor.constraint(equalToConstant: 90)
         ])
     }
+    
+    // MARK: - Internal methods
+    
+    func configureWith(viewData: [HourlyForecastViewData]) {
+        self.viewData = viewData
+        hourlyForecastCollectionView.reloadData()
+    }
 }
 
 // MARK: - UICollectionViewDataSource
 
 extension HourlyForecastTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+        return viewData.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = hourlyForecastCollectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseID,
-                                                                    for: indexPath)
+        guard let cell = hourlyForecastCollectionView.dequeueReusableCell(withReuseIdentifier: HourlyForecastCollectionViewCell.reuseID,
+                                                                    
+                                                                          for: indexPath) as? HourlyForecastCollectionViewCell else {
+            print("error")
+            return UICollectionViewCell()
+        }
+        cell.configureWith(viewData[indexPath.row])
         return cell
     }
-    
-    
 }
 
 // MARK: - UICollectionViewDelegate
 
 extension HourlyForecastTableViewCell: UICollectionViewDelegate {
-    
+
 }
 
 // MARK: - UICollectionViewDelegateFlowLayout

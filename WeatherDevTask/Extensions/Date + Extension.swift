@@ -12,6 +12,7 @@ extension Date {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
         dateFormatter.timeZone = TimeZone(secondsFromGMT: timezone)
+        dateFormatter.locale = Locale(identifier: "en-GB")
         return dateFormatter.string(from: self)
     }
     

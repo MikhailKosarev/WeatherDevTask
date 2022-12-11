@@ -23,9 +23,9 @@ final class ModuleBulder: Builder {
     
     static func createDetailWeatherModule() -> UIViewController {
         let view = DetailWeatherViewController()
-//        let networkService = NetworkService()
-//        let presenter = Deta(view: view, networkService: networkService)
-//        view.presenter = presenter
+        let networkService = NetworkService()
+        let presenter = DetailWeatherPresenter(view: view, networkService: networkService)
+        view.presenter = presenter
         return view
     }
 }
