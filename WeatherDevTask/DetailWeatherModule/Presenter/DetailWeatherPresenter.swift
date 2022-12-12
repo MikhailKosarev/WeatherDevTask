@@ -162,8 +162,8 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
     private func fillHourlyForecastViewDataWith(_ weatherData: OneCallWeatherData,
                                                 hours: Int) {
         // check index out of range
-        let maxHours = max(hours, weatherData.hourly.count)
-        for index in 0..<maxHours {
+        let minHours = min(hours, weatherData.hourly.count)
+        for index in 0..<minHours {
             let hourly = weatherData.hourly[index]
             // get time
             let time = self.dateConverter.convertingUTCtime(hourly.dt).dtToTime12Hours(weatherData.timezoneOffset)
@@ -180,9 +180,9 @@ final class DetailWeatherPresenter: DetailWeatherPresenterProtocol {
     private func fillDailyForecastViewDataWith(_ weatherData: OneCallWeatherData,
                                                days: Int) {
         // check index out of range
-        let maxDays = max(days, weatherData.daily.count)
+        let minDays = min(days, weatherData.daily.count)
         // excluding today
-        for index in 1..<maxDays {
+        for index in 1..<minDays {
             let daily = weatherData.daily[index]
             // get day of week
             let dayOfWeek = self.dateConverter.convertingUTCtime(daily.dt).dtToDayOfWeek(weatherData.timezoneOffset)
