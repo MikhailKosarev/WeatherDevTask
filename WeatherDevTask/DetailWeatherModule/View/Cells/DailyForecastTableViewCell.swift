@@ -20,7 +20,6 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Tuesday"
         return label
     }()
     
@@ -37,8 +36,7 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 13, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "80%"
-        label.textColor = #colorLiteral(red: 0.4862745098, green: 0.8117647059, blue: 0.9764705882, alpha: 1)
+        label.textColor = Constants.humidityLabelTextColor
         return label
     }()
     
@@ -47,7 +45,6 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "14"
         label.textAlignment = .right
         return label
     }()
@@ -57,7 +54,6 @@ final class DailyForecastTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "4"
         label.alpha = 0.5
         label.textAlignment = .right
         return label
@@ -87,12 +83,9 @@ final class DailyForecastTableViewCell: UITableViewCell {
         let stackView = UIStackView(arrangedSubviews: [dayTitleLabel,
                                                        weatherHumidityStackView,
                                                        temperatureStackView])
-        //        stackView.spacing = 8
         stackView.distribution = .fillEqually
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.setCustomSpacing(4, after: weatherImageView)
-//        stackView.setCustomSpacing(8, after: dayTemperatureLabel)
         return stackView
     }()
 
@@ -128,7 +121,6 @@ final class DailyForecastTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             // weatherImageView
             weatherImageView.heightAnchor.constraint(equalToConstant: 30),
-//            weatherImageView.widthAnchor.constraint(equalToConstant: 30),
             
             // dailyForecastStackView
             dailyForecastStackView.leadingAnchor.constraint(equalTo: layoutMarginsGuide.leadingAnchor),

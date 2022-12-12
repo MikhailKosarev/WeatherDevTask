@@ -9,7 +9,7 @@ import UIKit
 
 struct TemperatureFormatter {
     static func getStringTemperatureFrom(_ temperature: Double) -> String {
-        let temperature = String(format: "%.0f", temperature) + "°"
+        let temperature = String(format: "%.0f", temperature) + Units.degree
         return temperature.replacingOccurrences(of: "-0", with: "0")
     }
     static func getStringTemperatureWithoutDegreeSignFrom(_ temperature: Double) -> String {

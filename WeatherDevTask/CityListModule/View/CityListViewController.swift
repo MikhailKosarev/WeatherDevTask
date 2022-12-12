@@ -51,9 +51,6 @@ final class CityListViewController: UITableViewController {
                            forCellReuseIdentifier: SearchTableViewCell.reuseID)
         tableView.register(CityTableViewCell.self,
                            forCellReuseIdentifier: CityTableViewCell.reuseID)
-//        tableView.estimatedRowHeight = 200
-//        tableView.rowHeight = UITableView.automaticDimension
-//        tableView.allowsSelection = false
     }
     
     private func setConstraints() {
@@ -72,12 +69,11 @@ final class CityListViewController: UITableViewController {
         navBar?.isTranslucent = false
         navBar?.titleTextAttributes = [.foregroundColor: UIColor.white]
         
-        // remove the back button text:
+        // remove the back button text
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "",
                                                            style: .plain,
                                                            target: nil,
                                                            action: nil)
-//        self.navigationController?.navigationBar.setNeedsLayout()
     }
     
     private func showSpinner() {
@@ -91,35 +87,30 @@ final class CityListViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return CityListTableViewSection.numberOfSections
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        guard let section = CityListTableViewSection(sectionIndex: section) else { return 0 }
         switch section {
-        // search section
-        case 0:
+        case .searchSection:
             return 1
-        // city list section
-        case 1:
+        case .cityListSection:
             return presenter?.getNumberOfCities() ?? 0
-        // default case
-        default:
-            return 0
         }
     }
 
     // MARK: - Table view delegate
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        // search section
-        case 0:
+        guard let section = CityListTableViewSection(sectionIndex: indexPath.section) else { return UITableViewCell() }
+        switch section {
+        case .searchSection:
             guard let cell = tableView.dequeueReusableCell(withIdentifier: SearchTableViewCell.reuseID,
                                                            for: indexPath) as? SearchTableViewCell else { return UITableViewCell() }
             cell.delegate = self
             return cell
-        // city list section
-        case 1:
+        case .cityListSection:
             let cell = tableView.dequeueReusableCell(withIdentifier: CityTableViewCell.reuseID,
                                                      for: indexPath) as! CityTableViewCell
             guard let viewData = presenter?.filteredWeatherDataArray[indexPath.row] else {
@@ -127,9 +118,6 @@ final class CityListViewController: UITableViewController {
             }
             cell.configureWith(viewData)
             return cell
-        // default case
-        default:
-            return UITableViewCell()
         }
     }
     
@@ -154,7 +142,8 @@ extension CityListViewController: CitySearchDelegateProtocol {
 
 extension CityListViewController: CityListViewProtocol {
     func reloadCityListSection() {
-        tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+        tableView.reloadSections(IndexSet(integer: CityListTableViewSection.cityListSection.rawValue),
+                                 with: .automatic)
         hideSpinner()
     }
 }

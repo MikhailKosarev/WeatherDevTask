@@ -65,8 +65,6 @@ final class HourlyForecastTableViewCell: UITableViewCell {
     }
     
     private func setConstraints() {
-//        let safeArea = safeAreaLayoutGuide
-        
         NSLayoutConstraint.activate([
             // hourlyForecastCollectionView
             hourlyForecastCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),

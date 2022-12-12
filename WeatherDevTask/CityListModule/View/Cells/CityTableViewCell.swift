@@ -20,7 +20,6 @@ final class CityTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 15, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "16:07"
         return label
     }()
     
@@ -29,7 +28,6 @@ final class CityTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 25, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Warsaw"
         return label
     }()
     
@@ -46,7 +44,6 @@ final class CityTableViewCell: UITableViewCell {
         label.textColor = .white
         label.font = .systemFont(ofSize: 50, weight: .thin)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "2°"
         label.textAlignment = .right
         return label
     }()
@@ -63,7 +60,6 @@ final class CityTableViewCell: UITableViewCell {
     private lazy var weatherStackView: UIStackView = {
         let stackView = UIStackView(arrangedSubviews: [weatherImageView,
                                                        temperatureLabel])
-//        stackView.distribution = .equalSpacing
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
@@ -100,7 +96,6 @@ final class CityTableViewCell: UITableViewCell {
     
     private func setConstraints() {
         // set margins
-//        contentView.layoutMargins = .init(top: 8.0, left: 0, bottom: 8.0, right: 0)
         contentView.preservesSuperviewLayoutMargins = false
         let margins = contentView.layoutMarginsGuide
         

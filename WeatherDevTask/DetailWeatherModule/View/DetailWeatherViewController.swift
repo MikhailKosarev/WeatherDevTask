@@ -56,7 +56,7 @@ final class DetailWeatherViewController: UIViewController {
     // MARK: - Private methods
     
     private func setupView() {
-        view.backgroundColor = #colorLiteral(red: 0.3048475683, green: 0.598276794, blue: 0.8936008811, alpha: 1)
+        view.backgroundColor = Constants.detailWeatherScreenBackgroundColor
         view.addSubview(currentForecastView)
         view.addSubview(weatherTableView)
         view.addSubview(activityIndicator)
@@ -85,7 +85,6 @@ final class DetailWeatherViewController: UIViewController {
         navBar?.barStyle = .black
         navBar?.isTranslucent = true
         navBar?.tintColor = .white
-//        self.navigationController?.navigationBar.setNeedsLayout()
     }
     
     private func setConstraints() {
@@ -122,59 +121,52 @@ final class DetailWeatherViewController: UIViewController {
 
 extension DetailWeatherViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        // hourlyForecastData section
-        case 0:
-            return presenter?.getNumberOfHourlyForecastRows() ?? 0
-        // dailyForecastData section
-        case 1:
-            return presenter?.getNumberOfDailyForecastRows() ?? 0
-        // todaysDescriptionData section
-        case 2:
-            return presenter?.getNumberOfTodaysDescriptionRows() ?? 0
-        // otherParametersViewData section
-        case 3:
-            return presenter?.getNumberOfOtherParametersRows() ?? 0
-        // default case
-        default:
+        guard let section = DetailWeatherTableViewSection(sectionIndex: section) else {
             return 0
+        }
+        switch section {
+        case .hourlyForecast:
+            return presenter?.getNumberOfHourlyForecastRows() ?? 0
+        case .dailyForecast:
+            return presenter?.getNumberOfDailyForecastRows() ?? 0
+        case .todaysDescription:
+            return presenter?.getNumberOfTodaysDescriptionRows() ?? 0
+        case .otherParameters:
+            return presenter?.getNumberOfOtherParametersRows() ?? 0
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        // HourlyForecastTableViewCell
-        case 0:
+        guard let section = DetailWeatherTableViewSection(sectionIndex: indexPath.section) else {
+            return UITableViewCell()
+        }
+        switch section {
+        case .hourlyForecast:
             guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: HourlyForecastTableViewCell.reuseID,
                                                                   for: indexPath) as? HourlyForecastTableViewCell else {
                 return UITableViewCell()
             }
-            guard let hourlyForecastViewData = presenter?.hourlyForecastData else { return UITableViewCell() }
+            guard let hourlyForecastViewData = presenter?.getHourlyForecastData() else { return UITableViewCell() }
             cell.configureWith(viewData: hourlyForecastViewData)
             return cell
-        // DailyForecastTableViewCell
-        case 1:
+        case .dailyForecast:
             guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: DailyForecastTableViewCell.reuseID,
                                                             for: indexPath) as? DailyForecastTableViewCell else { return UITableViewCell() }
-            guard let dailyForecastViewData = presenter?.dailyForecastData[indexPath.row] else { return UITableViewCell() }
+            guard let dailyForecastViewData = presenter?.getDailyForecastDataFor(indexPath.row) else { return UITableViewCell() }
             cell.configureWith(viewData: dailyForecastViewData)
             return cell
-        // TodaysDescriptionTableViewCell
-        case 2:
+        case .todaysDescription:
             guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: TodaysDescriptionTableViewCell.reuseID,
                                                                   for: indexPath) as? TodaysDescriptionTableViewCell else { return UITableViewCell() }
-            guard let todaysDescriptionViewData = presenter?.todaysDescriptionData else { return UITableViewCell() }
+            guard let todaysDescriptionViewData = presenter?.getTodaysDescriptionData() else { return UITableViewCell() }
             cell.configureWith(viewData: todaysDescriptionViewData)
             return cell
-        // OtherParametersTableViewCell
-        case 3:
+        case .otherParameters:
             guard let cell = weatherTableView.dequeueReusableCell(withIdentifier: OtherParametersTableViewCell.reuseID,
                                                                   for: indexPath)  as? OtherParametersTableViewCell else { return UITableViewCell() }
-            guard let otherParametersViewData = presenter?.otherParametersViewData else { return UITableViewCell() }
-            cell.configureWith(viewData: otherParametersViewData[indexPath.row])
+            guard let otherParametersViewData = presenter?.getOtherParametersViewDataFor(indexPath.row) else { return UITableViewCell() }
+            cell.configureWith(viewData: otherParametersViewData)
             return cell
-        default:
-            return UITableViewCell()
         }
     }
 }
@@ -183,22 +175,23 @@ extension DetailWeatherViewController: UITableViewDataSource {
 
 extension DetailWeatherViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.section {
-        case 0:
-            return 100
-        case 1:
-            return 40
-        case 2:
-            return 66
-        case 3:
-            return 66
-        default:
-            return 0
+        guard let section = DetailWeatherTableViewSection(sectionIndex: indexPath.section) else {
+            return CGFloat()
+        }
+        switch section {
+        case .hourlyForecast:
+            return section.cellHeight
+        case .dailyForecast:
+            return section.cellHeight
+        case .todaysDescription:
+            return section.cellHeight
+        case .otherParameters:
+            return section.cellHeight
         }
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        4
+        DetailWeatherTableViewSection.numberOfSections
     }
 }
 
@@ -215,28 +208,32 @@ extension DetailWeatherViewController: UIScrollViewDelegate {
 
 extension DetailWeatherViewController: DetailWeatherViewProtocol {
     func reloadCurrentForecastView() {
-        guard let viewData = presenter?.currentForecastData else { return }
+        guard let viewData = presenter?.currentForecastViewData else { return }
         currentForecastView.configureWith(viewData)
         hideSpinner()
     }
     
     func reloadHourlyForecastSection() {
-        weatherTableView.reloadSections(IndexSet(integer: 0), with: .automatic)
+        weatherTableView.reloadSections(IndexSet(integer: DetailWeatherTableViewSection.hourlyForecast.rawValue),
+                                        with: .automatic)
         hideSpinner()
     }
     
     func reloadDailyForecastSection() {
-        weatherTableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+        weatherTableView.reloadSections(IndexSet(integer: DetailWeatherTableViewSection.dailyForecast.rawValue),
+                                        with: .automatic)
         hideSpinner()
     }
     
     func reloadTodaysDescriptionSection() {
-        weatherTableView.reloadSections(IndexSet(integer: 2), with: .automatic)
+        weatherTableView.reloadSections(IndexSet(integer: DetailWeatherTableViewSection.todaysDescription.rawValue),
+                                        with: .automatic)
         hideSpinner()
     }
     
     func reloadOtherParametersSection() {
-        weatherTableView.reloadSections(IndexSet(integer: 3), with: .automatic)
+        weatherTableView.reloadSections(IndexSet(integer: DetailWeatherTableViewSection.otherParameters.rawValue),
+                                        with: .automatic)
         hideSpinner()
     }
 }

@@ -16,7 +16,6 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 34, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "New York"
         return label
     }()
     
@@ -25,7 +24,6 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 96, weight: .thin)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "7°"
         return label
     }()
     
@@ -34,7 +32,6 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "Mostly Cloudy"
         return label
     }()
     
@@ -43,7 +40,6 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .regular)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "H:8° L:0°"
         return label
     }()
     
@@ -52,7 +48,6 @@ final class CurrentForecastView: UIView {
         label.textColor = .white
         label.font = .systemFont(ofSize: 20, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
-//        label.text = "8° | Cloudy"
         return label
     }()
     
@@ -63,7 +58,6 @@ final class CurrentForecastView: UIView {
                                                        highLowLabel,
                                                        shortWeatherDescriptionLabel])
         stackView.axis = .vertical
-//        stackView.spacing = 4
         stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         return stackView
